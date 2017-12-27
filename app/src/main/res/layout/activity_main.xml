@@ -103,22 +103,36 @@
 
                         </LinearLayout>
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:id="@+id/resultbase"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="14dp"
+                            android:orientation="vertical"
                             android:animateLayoutChanges="true"
-                            android:layout_marginTop="4dp"
                             android:visibility="visible">
 
                             <LinearLayout
                                 android:id="@+id/catholder"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:animateLayoutChanges="true"
                                 android:background="#ffffff"
                                 android:orientation="vertical">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#64202020" />
+
+                                <ProgressBar
+                                    android:id="@+id/progress"
+                                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-7dp"
+                                    android:indeterminate="true"
+                                    android:indeterminateBehavior="repeat"
+                                    android:progress="50"
+                                    android:visibility="invisible" />
 
                                 <TextView
                                     android:id="@+id/inall"
@@ -162,34 +176,18 @@
                                     android:text="Avengers in TV Series"
                                     android:textSize="14sp" />
 
-                                <android.support.v7.widget.RecyclerView
-                                    android:id="@+id/instant_inmovies"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginStart="10dp"
-                                    android:clipToPadding="false"
-                                    android:nestedScrollingEnabled="false"
-                                    android:overScrollMode="never"
-                                    android:visibility="visible" />
-
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="#64202020" />
-
-                            <ProgressBar
-                                android:id="@+id/progress"
-                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/instant_inmovies"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="-7dp"
-                                android:indeterminate="true"
-                                android:indeterminateBehavior="repeat"
-                                android:progress="50"
-                                android:visibility="invisible" />
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginStart="10dp"
+                                android:clipToPadding="false"
+                                android:nestedScrollingEnabled="false"
+                                android:overScrollMode="never"
+                                android:visibility="visible" />
 
                             <TextView
                                 android:id="@+id/nothing"
@@ -230,7 +228,7 @@
 
                             </LinearLayout>
 
-                        </RelativeLayout>
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -245,6 +243,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:elevation="2dp"
+            android:fitsSystemWindows="false"
             app:elevation="2dp"
             app:itemIconTint="@color/selector"
             app:itemTextColor="@color/selector"

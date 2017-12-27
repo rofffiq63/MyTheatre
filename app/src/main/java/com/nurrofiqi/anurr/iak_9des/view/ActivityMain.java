@@ -66,7 +66,6 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
     @BindView(R.id.instant_inmovies) RecyclerView searchList;
     @BindView(R.id.catholder) LinearLayout mcatholder;
     @BindView(R.id.error) LinearLayout merror;
-    @BindView(R.id.resultbase) RelativeLayout mresultbase;
     @BindView(R.id.nothing) TextView nothing;
     @BindView(R.id.inmovies) TextView inmovies;
     @BindView(R.id.intv) TextView intv;
@@ -147,7 +146,7 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
     private void initiateView(Bundle savedInstanceState) {
 
         clearsearch.setVisibility(View.GONE);
-        mresultbase.setVisibility(View.GONE);
+        mcatholder.setVisibility(View.GONE);
         searchList.setVisibility(View.GONE);
         darkDrop.setVisibility(View.GONE);
 
@@ -251,11 +250,10 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
                 intv.setText(Html.fromHtml("<b>" + livetext + "</b> in TV Series"));
 
                 if (msearch.length() == 0) {
-                    mresultbase.setVisibility(View.GONE);
+                    mcatholder.setVisibility(View.GONE);
                     clearsearch.setVisibility(View.GONE);
                     filterbut.setVisibility(View.VISIBLE);
                 } else {
-                    mresultbase.setVisibility(View.VISIBLE);
                     mcatholder.setVisibility(View.VISIBLE);
                     clearsearch.setVisibility(View.VISIBLE);
                     nothing.setVisibility(View.GONE);
@@ -321,7 +319,7 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
 
             // create the animator for this view (the start radius is zero)
             Animator circularReveal = ViewAnimationUtils.createCircularReveal(rootLayout, x, y, 0, finalRadius);
-            circularReveal.setDuration(700);
+            circularReveal.setDuration(300);
             circularReveal.setInterpolator(new AccelerateInterpolator());
 
             // make the view visible and start the animation
@@ -340,7 +338,7 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
             Animator circularReveal = ViewAnimationUtils.createCircularReveal(
                     rootLayout, revealX, revealY, finalRadius, 0);
 
-            circularReveal.setDuration(400);
+            circularReveal.setDuration(300);
             circularReveal.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
