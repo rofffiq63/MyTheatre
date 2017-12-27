@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -44,16 +45,18 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
     @BindView(R.id.similiarlist) RecyclerView similiarList;
     @BindView(R.id.toolbar) Toolbar mtoolbar;
     @BindView(R.id.progressholder) RelativeLayout progressHolder;
-    @BindView(R.id.contentholder) LinearLayout contentHolder;
     @BindView(R.id.poster) ImageView mposter;
     @BindView(R.id.backdrop) ImageView mbackdrop;
     @BindView(R.id.title) TextView mtitle;
-    @BindView(R.id.subtitle) TextView subtitle;
-    @BindView(R.id.overview) TextView moverview;
+    @BindView(R.id.synopsis) TextView moverview;
     @BindView(R.id.genres) TextView mgenres;
     @BindView(R.id.rating) TextView mrate;
     @BindView(R.id.vote) TextView mvote;
-    @BindView(R.id.ratingbar) RatingBar ratingBar;
+    @BindView(R.id.ratingbardetail) RatingBar mratingBar;
+    @BindView(R.id.backbutton) ImageView backbutton;
+    @BindView(R.id.company) TextView companies;
+    @BindView(R.id.release) TextView release;
+    @BindView(R.id.duration) TextView mruntime;
 
     ArrayList<PojoAtMovies.ResultsBean> similiarData;
     AdapterAtMovies adapterSimiliar;
@@ -79,10 +82,16 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
     private void initiateView() {
 
         progressHolder.setVisibility(View.VISIBLE);
-        contentHolder.setVisibility(View.GONE);
 
         mPresenter = new MainActivityPresenter(MainActivityRepoInject.provideToMainRepo(getApplicationContext()));
         mPresenter.onAttachView(this);
+
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         ids = getIntent().getExtras().getInt("ids");
 
@@ -112,7 +121,7 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
     }
 
     @Override
-    public void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres,
+    public void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres, List<PojoDetail.ProductionCompaniesBean> product,
                               String homepage, String original_title, String title,
                               String overview, double popularity, String poster, String backdrop,
                               String date, int revenue, int runtime, String status, String tagline,
@@ -126,37 +135,39 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
             arraygenres[i] = item;
         }
 
+        final String[] arraycompanies = new String[product.size()];
+        for (int i = 0; i < arraycompanies.length; i++) {
+            PojoDetail.ProductionCompaniesBean listcompanies = product.get(i);
+            item = listcompanies.getName();
+            arraycompanies[i] = item;
+        }
+
         float rating;
         rating  = Float.valueOf(String.valueOf(rate));
         rating = rating/2;
 
-        if (runtime!=0){
-            subtitle.setText(status + " - " + date + "\n" + String.valueOf(runtime) + " minutes \n" + language.toUpperCase());
-        } else {
-            subtitle.setText(status + "\nscheduled release " + date + "\n" + language.toUpperCase());
-        }
-
         if (rate!=0){
             mrate.setText(new DecimalFormat("0.0").format(rating));
         } else {
-            mrate.setText("Not Rated");
+            mrate.setTextSize(12f);
+            mrate.setText("Not\nRated");
+        }
+
+        if (runtime!=0){
+            release.setText(Html.fromHtml("<b>Release date</b> <br>" + date));
+            mruntime.setText(Html.fromHtml("<b>Duration</b> <br>" + runtime + " minutes"));
+        } else {
+            release.setText(Html.fromHtml("<b>Release date</b> <br>" + date));
+            mruntime.setText(Html.fromHtml("<b>Duration</b> <br>" + status ));
         }
 
         mtitle.setText(title);
         moverview.setText(overview);
         mgenres.setText(TextUtils.join(", ", arraygenres));
-        ratingBar.setRating(rating);
-        mvote.setText(String.valueOf(vote));
+        companies.setText(TextUtils.join(", ", arraycompanies));
 
-        setSupportActionBar(mtoolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mtoolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        getSupportActionBar().setTitle("");
+        mratingBar.setRating(rating);
+        mvote.setText(String.valueOf(vote));
 
         Glide.with(this)
                 .load("http://image.tmdb.org/t/p/w342" + poster)
@@ -169,7 +180,6 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         progressHolder.setVisibility(View.GONE);
-                        contentHolder.setVisibility(View.VISIBLE);
                         return false;
                     }
                 })

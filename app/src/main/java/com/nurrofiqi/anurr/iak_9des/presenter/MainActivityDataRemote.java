@@ -79,7 +79,7 @@ public class MainActivityDataRemote implements MainActivityDataResource {
                         mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
                     } else {
                         mainActivityGetCallBack.successDetail(
-                                pojoDetail.getId(), pojoDetail.getBudget(), pojoDetail.getGenres(),
+                                pojoDetail.getId(), pojoDetail.getBudget(), pojoDetail.getGenres(), pojoDetail.getProduction_companies(),
                                 pojoDetail.getHomepage(), pojoDetail.getOriginal_title(), pojoDetail.getTitle(),
                                 pojoDetail.getOverview(), pojoDetail.getPopularity(), pojoDetail.getPoster_path(),
                                 pojoDetail.getBackdrop_path(), pojoDetail.getRelease_date(), pojoDetail.getRevenue(),

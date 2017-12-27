@@ -40,12 +40,12 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             }
 
             @Override
-            public void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres,
+            public void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres, List<PojoDetail.ProductionCompaniesBean> product,
                                       String homepage, String original_title, String title,
                                       String overview, double popularity, String poster,
                                       String backdrop, String date, int revenue, int runtime,
                                       String status, String tagline, double rate, int vote, String language) {
-                view.successDetail(id, budget, genres, homepage, original_title, title,
+                view.successDetail(id, budget, genres, product, homepage, original_title, title,
                         overview, popularity, poster, backdrop, date, revenue, runtime,
                         status, tagline, rate, vote, language);
             }

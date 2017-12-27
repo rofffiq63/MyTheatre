@@ -428,7 +428,7 @@ public class PojoDetail implements Parcelable {
         }
     }
 
-    public static class ProductionCompaniesBean {
+    public static class ProductionCompaniesBean implements Parcelable {
         /**
          * name : Walt Disney Pictures
          * id : 2
@@ -436,6 +436,23 @@ public class PojoDetail implements Parcelable {
 
         private String name;
         private int id;
+
+        protected ProductionCompaniesBean(Parcel in) {
+            name = in.readString();
+            id = in.readInt();
+        }
+
+        public static final Creator<ProductionCompaniesBean> CREATOR = new Creator<ProductionCompaniesBean>() {
+            @Override
+            public ProductionCompaniesBean createFromParcel(Parcel in) {
+                return new ProductionCompaniesBean(in);
+            }
+
+            @Override
+            public ProductionCompaniesBean[] newArray(int size) {
+                return new ProductionCompaniesBean[size];
+            }
+        };
 
         public String getName() {
             return name;
@@ -451,6 +468,17 @@ public class PojoDetail implements Parcelable {
 
         public void setId(int id) {
             this.id = id;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(name);
+            dest.writeInt(id);
         }
     }
 

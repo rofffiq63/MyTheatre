@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ceritanya Movies</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis vestibulum euismod. Vivamus bibendum magna facilisis arcu cursus condimentum. Fusce ac ligula maximus, scelerisque ipsum eu, pulvinar nisl. Nam ullamcorper volutpat imperdiet. Ut vitae tristique erat. Nam ornare rhoncus velit in finibus. Donec bibendum a augue et malesuada. Fusce pretium purus in ligula egestas, non pharetra sem commodo.</string>
 </resources>

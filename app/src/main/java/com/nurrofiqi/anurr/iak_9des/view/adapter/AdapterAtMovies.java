@@ -128,9 +128,11 @@ public class AdapterAtMovies extends RecyclerView.Adapter<AdapterAtMovies.ViewHo
                 ((RecommendedMoviesView) holder).judul.setText(judul);
                 ((RecommendedMoviesView) holder).rating.setText(new DecimalFormat("0.0").format(rate));
                 ((RecommendedMoviesView) holder).ratingBar.setRating(rate);
+                ((RecommendedMoviesView) holder).positiontext.setText(String.valueOf(position+1)+"/"+data.size());
 
                 Glide.with(context)
                         .load(poster)
+                        .placeholder(R.drawable.ic_movie_black_24dp)
                         .crossFade()
                         .into(((RecommendedMoviesView) holder).poster);
 
@@ -184,7 +186,7 @@ public class AdapterAtMovies extends RecyclerView.Adapter<AdapterAtMovies.ViewHo
     private class RecommendedMoviesView extends ViewHolder {
 
         ImageView poster;
-        TextView judul, rating;
+        TextView judul, rating, positiontext;
         RatingBar ratingBar;
 
         public RecommendedMoviesView(View recommendedView) {
@@ -194,6 +196,7 @@ public class AdapterAtMovies extends RecyclerView.Adapter<AdapterAtMovies.ViewHo
             judul = itemView.findViewById(R.id.judul);
             rating = itemView.findViewById(R.id.rate);
             ratingBar = itemView.findViewById(R.id.ratingbar);
+            positiontext = itemView.findViewById(R.id.position);
 
         }
     }

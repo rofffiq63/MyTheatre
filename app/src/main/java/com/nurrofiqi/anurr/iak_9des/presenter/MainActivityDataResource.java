@@ -24,7 +24,7 @@ public interface MainActivityDataResource {
 
         void successMainMovies(List<PojoAtMovies.ResultsBean> mainmoviesdata, int id);
 
-        void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres, String homepage,
+        void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres, List<PojoDetail.ProductionCompaniesBean> product, String homepage,
                            String original_title, String title, String overview, double popularity,
                            String poster, String backdrop, String date, int revenue, int runtime,
                            String status, String tagline, double rate, int vote, String language);

@@ -56,7 +56,7 @@ public class FragmentBase extends android.support.v4.app.Fragment {
 
     static LinearLayout recommendHolder, nowHolder, popHolder, upHolder;
     static ProgressBar progresscircle;
-    TextView nowShowing, popular, upcoming;
+    TextView nowShowing, popular, upcoming, upsubtitle, popsubtitle, nowsubtitle;
     BottomNavigationViewEx bottomNavigationViewEx;
 
     String save = "save";
@@ -82,6 +82,9 @@ public class FragmentBase extends android.support.v4.app.Fragment {
         nowShowing = view.findViewById(R.id.nowtitle);
         popular = view.findViewById(R.id.poptitle);
         upcoming = view.findViewById(R.id.uptitle);
+        upsubtitle = view.findViewById(R.id.upsubtitle);
+        popsubtitle = view.findViewById(R.id.popsubtitle);
+        nowsubtitle = view.findViewById(R.id.nowsubtitle);
 
         bottomNavigationViewEx = getActivity().findViewById(R.id.navigation);
 
@@ -227,6 +230,9 @@ public class FragmentBase extends android.support.v4.app.Fragment {
                 nowShowing.setText("Airing today");
                 popular.setText("Popular series");
                 upcoming.setText("On the air");
+                nowsubtitle.setText("your daily dose of series");
+                popsubtitle.setText("everyone's talking about it");
+                upsubtitle.setText("airing series for next 7 days");
 
                 recommendedSeries = new ArrayList<>();
                 adapterRecommSeries = new AdapterAtSeries(getContext(), recommendedSeries, RECOMMENDED_LAYOUT);

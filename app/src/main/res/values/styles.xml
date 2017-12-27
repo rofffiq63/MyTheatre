@@ -11,7 +11,7 @@
 
     <style name="MyTheme" parent="AppTheme">
 
-        <item name="android:statusBarColor">@color/appAccent</item>
+        <item name="android:statusBarColor">@color/appColor</item>
         <item name="colorPrimary">@color/appAccent</item>
         <item name="windowNoTitle">true</item>
         <item name="colorAccent">@color/appColor</item>
@@ -23,7 +23,7 @@
 
     <style name="MyDetail" parent="MyTheme">
 
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_24dp</item>
         <item name="android:windowBackground">@color/brokenwhite</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>

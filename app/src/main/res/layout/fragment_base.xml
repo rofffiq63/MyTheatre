@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f5f5f5"
+    android:background="@color/appContrast"
     android:orientation="vertical">
 
     <LinearLayout
@@ -44,6 +44,7 @@
                     android:id="@+id/recommendlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/appColor"
                     android:orientation="vertical">
 
                     <android.support.v7.widget.RecyclerView
@@ -76,13 +77,27 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/white"
-                            android:paddingBottom="16dp"
                             android:paddingEnd="12dp"
                             android:paddingStart="12dp"
                             android:paddingTop="16dp"
                             android:text="Now showing"
                             android:textColor="#b3202020"
                             android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="24dp"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="12dp"
+                            android:background="@color/redColor" />
+
+                        <TextView
+                            android:id="@+id/nowsubtitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="16dp"
+                            android:paddingStart="12dp"
+                            android:text="you don't want to miss"
+                            android:textSize="12sp" />
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/nowlist"
@@ -118,13 +133,27 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/white"
-                            android:paddingBottom="16dp"
                             android:paddingEnd="12dp"
                             android:paddingStart="12dp"
                             android:paddingTop="16dp"
                             android:text="Popular movies"
                             android:textColor="#b3202020"
                             android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="24dp"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="12dp"
+                            android:background="@color/redColor" />
+
+                        <TextView
+                            android:id="@+id/popsubtitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="16dp"
+                            android:paddingStart="12dp"
+                            android:text="all around the world"
+                            android:textSize="12sp" />
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/poplist"
@@ -159,13 +188,27 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@color/white"
-                            android:paddingBottom="16dp"
                             android:paddingEnd="12dp"
                             android:paddingStart="12dp"
                             android:paddingTop="16dp"
                             android:text="Upcoming movies"
                             android:textColor="#b3202020"
                             android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="24dp"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="12dp"
+                            android:background="@color/redColor" />
+
+                        <TextView
+                            android:id="@+id/upsubtitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="16dp"
+                            android:paddingStart="12dp"
+                            android:text="brace yourself, movies is coming!"
+                            android:textSize="12sp" />
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/uplist"

@@ -3,8 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="appColor">#424242</color>
-    <color name="appAccent">#424242</color>
+    <color name="appColor">#212121</color>
+    <color name="appAccent">#212121</color>
     <color name="appContrast">#f5f5f5</color>
     <color name="textColor">#121212</color>
+    <color name="redColor">#D32F2F</color>
+    <color name="redCerahColor">#EF5350</color>
+    <color name="redDarker">#B71C1C</color>
+    <color name="statusBar">#C62828</color>
+    <color name="blackColor">#424242</color>
 </resources>

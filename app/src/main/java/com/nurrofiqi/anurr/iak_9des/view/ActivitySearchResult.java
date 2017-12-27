@@ -27,13 +27,10 @@ public class ActivitySearchResult implements MainActivityContract.View {
     }
 
     @Override
-    public void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres,
-                              String homepage, String original_title, String title, String overview,
-                              double popularity, String poster, String backdrop, String date,
-                              int revenue, int runtime, String status, String tagline, double rate,
-                              int vote, String language) {
+    public void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres, List<PojoDetail.ProductionCompaniesBean> product, String homepage, String original_title, String title, String overview, double popularity, String poster, String backdrop, String date, int revenue, int runtime, String status, String tagline, double rate, int vote, String language) {
 
     }
+
 
     @Override
     public void successGenre(List<PojoGenre.GenresBean> genredata) {

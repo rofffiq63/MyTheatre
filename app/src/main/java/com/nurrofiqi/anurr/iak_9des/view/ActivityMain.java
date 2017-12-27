@@ -499,7 +499,7 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
     }
 
     @Override
-    public void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres,
+    public void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres, List<PojoDetail.ProductionCompaniesBean> product,
                               String homepage, String original_title, String title,
                               String overview, double popularity, String poster, String backdrop,
                               String date, int revenue, int runtime, String status, String tagline,

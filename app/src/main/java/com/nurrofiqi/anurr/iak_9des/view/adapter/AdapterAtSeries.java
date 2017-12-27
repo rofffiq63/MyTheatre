@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,8 +79,8 @@ public class AdapterAtSeries extends RecyclerView.Adapter<AdapterAtSeries.ViewHo
                 //pop = pop.substring(0, 4);
 
                 float rating;
-                rating  = Float.valueOf(String.valueOf(voteAvg));
-                rating = rating/2;
+                rating = Float.valueOf(String.valueOf(voteAvg));
+                rating = rating / 2;
 
                 String oriDate = listitem.getFirst_air_date();
                 if (oriDate.length() >= 4) {
@@ -110,17 +111,12 @@ public class AdapterAtSeries extends RecyclerView.Adapter<AdapterAtSeries.ViewHo
                     public void onClick(View v) {
                         Intent toDetail = new Intent(context, ActivityDetail.class);
                         toDetail.putExtra("ids", listitem.getId());
-                        toDetail.putExtra("title", listitem.getOriginal_name());
-                        toDetail.putExtra("tahun", finalOriDate);
-                        toDetail.putExtra("overview", listitem.getOverview());
-                        toDetail.putExtra("backdrop", listitem.getBackdrop_path());
-                        toDetail.putExtra("poster", listitem.getPoster_path());
                         v.getContext().startActivity(toDetail);
                     }
                 });
             } else if (type == ITEM_TYPE_RECOMMENDED) {
 
-                String poster = "http://image.tmdb.org/t/p/w342" + listitem.getPoster_path();
+                String poster = "http://image.tmdb.org/t/p/w500" + listitem.getBackdrop_path();
                 String judul = listitem.getOriginal_name();
                 String tahun = listitem.getFirst_air_date();
 
@@ -128,7 +124,13 @@ public class AdapterAtSeries extends RecyclerView.Adapter<AdapterAtSeries.ViewHo
                     tahun = tahun.substring(0, 4);
                 }
 
-                String rate = String.valueOf(listitem.getVote_average());
+                Float rate = (float) listitem.getVote_average();
+                rate = rate / 2;
+
+                ((RecommendedSeriesView) holder).judul.setText(judul);
+                ((RecommendedSeriesView) holder).rating.setText(new DecimalFormat("0.0").format(rate));
+                ((RecommendedSeriesView) holder).ratingBar.setRating(rate);
+                ((RecommendedSeriesView) holder).positiontext.setText(String.valueOf(position + 1) + "/" + data.size());
 
                 Glide.with(context)
                         .load(poster)
@@ -141,11 +143,6 @@ public class AdapterAtSeries extends RecyclerView.Adapter<AdapterAtSeries.ViewHo
                     public void onClick(View v) {
                         Intent toDetail = new Intent(context, ActivityDetail.class);
                         toDetail.putExtra("ids", listitem.getId());
-                        toDetail.putExtra("title", listitem.getOriginal_name());
-                        toDetail.putExtra("overview", listitem.getOverview());
-                        toDetail.putExtra("tahun", finalTahun);
-                        toDetail.putExtra("backdrop", listitem.getBackdrop_path());
-                        toDetail.putExtra("poster", listitem.getPoster_path());
                         v.getContext().startActivity(toDetail);
                     }
                 });
@@ -189,10 +186,17 @@ public class AdapterAtSeries extends RecyclerView.Adapter<AdapterAtSeries.ViewHo
     private class RecommendedSeriesView extends ViewHolder {
 
         ImageView poster;
+        TextView judul, rating, positiontext;
+        RatingBar ratingBar;
 
         public RecommendedSeriesView(View recommendedView) {
             super(recommendedView);
+
             poster = itemView.findViewById(R.id.poster);
+            judul = itemView.findViewById(R.id.judul);
+            rating = itemView.findViewById(R.id.rate);
+            ratingBar = itemView.findViewById(R.id.ratingbar);
+            positiontext = itemView.findViewById(R.id.position);
         }
     }
 
