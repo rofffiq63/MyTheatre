@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_movies"
+        android:icon="@drawable/ic_movie_black_24dp"
+        android:title="Movies" />
+
+    <item
+        android:id="@+id/navigation_series"
+        android:icon="@drawable/ic_antique_television"
+        android:title="TV Series" />
+
+    <item
+        android:id="@+id/watch_list"
+        android:icon="@drawable/ic_watch_later_black_24dp"
+        android:title="Watchlist" />
+
+    <item
+        android:id="@+id/navigation_favorites"
+        android:icon="@drawable/ic_favorite_black_24dp"
+        android:title="Favorites" />
+</menu>

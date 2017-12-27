@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true"
+        android:drawable="@drawable/ic_filter_list_selected_red_24dp" /> <!-- checked -->
+    <item android:state_checked="false"
+        android:drawable="@drawable/ic_filter_list_black_24dp" /> <!-- unchecked -->
+    <item android:state_focused="true"
+        android:drawable="@drawable/ic_filter_list_black_24dp" />    <!--on focus-->
+    <item android:drawable="@drawable/ic_filter_list_black_24dp" /> <!-- default -->
+</selector>
