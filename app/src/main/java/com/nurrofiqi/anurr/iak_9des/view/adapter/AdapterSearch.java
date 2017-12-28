@@ -47,13 +47,13 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
         double voteAvg;
         String oriDate = null, poster;
 
-        switch (kind.toLowerCase()){
+        switch (kind.toLowerCase()) {
             case "movie":
                 voteAvg = listitem.getVote_average();
                 oriDate = listitem.getRelease_date();
                 poster = "http://image.tmdb.org/t/p/w185" + listitem.getPoster_path();
 
-                if (!oriDate.isEmpty()){
+                if (!oriDate.isEmpty()) {
                     oriDate = oriDate.substring(0, 4);
                 }
 
@@ -74,7 +74,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
                 oriDate = listitem.getFirst_air_date();
                 poster = "http://image.tmdb.org/t/p/w185" + listitem.getPoster_path();
 
-                if (!oriDate.isEmpty()){
+                if (!oriDate.isEmpty()) {
                     oriDate = oriDate.substring(0, 4);
                 }
 
@@ -119,7 +119,11 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
     @Override
     public int getItemCount() {
-        return (null != search ? search.size() : 0);
+        if (search.size() > 3) {
+            return (null != search ? 3 : 0);
+        } else {
+            return (null != search ? search.size() : 0);
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
@@ -41,7 +42,8 @@ import butterknife.ButterKnife;
 
 public class FragmentBase extends android.support.v4.app.Fragment {
 
-    @BindView(R.id.recommendedlist) RecyclerView recommendedList;
+    @BindView(R.id.recommendedlist)
+    RecyclerView recommendedList;
 
     static RecyclerView genreList;
     RecyclerView upcomingList, nowList, popularList;
@@ -104,7 +106,7 @@ public class FragmentBase extends android.support.v4.app.Fragment {
         upHolder.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
             @Override
             public void onSystemUiVisibilityChange(int i) {
-                if (i == 1){
+                if (i == 1) {
                     popHolder.setVisibility(View.VISIBLE);
                 }
             }
@@ -204,9 +206,9 @@ public class FragmentBase extends android.support.v4.app.Fragment {
 
     private void initiateListView() {
         recommendedList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        nowList.setLayoutManager(new LinearLayoutManager(getContext() , LinearLayout.HORIZONTAL,false));
-        popularList.setLayoutManager(new LinearLayoutManager(getContext() , LinearLayout.HORIZONTAL,false));
-        upcomingList.setLayoutManager(new LinearLayoutManager(getContext() , LinearLayout.HORIZONTAL,false));
+        nowList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL, false));
+        popularList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL, false));
+        upcomingList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL, false));
 
         switch (bottomNavigationViewEx.getCurrentItem()) {
             case 0:
@@ -276,7 +278,13 @@ public class FragmentBase extends android.support.v4.app.Fragment {
     }
 
     public static FragmentBase setVisible() {
-        recommendHolder.setVisibility(View.VISIBLE);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                recommendHolder.setVisibility(View.VISIBLE);
+            }
+        }, 1000);
         upHolder.setVisibility(View.VISIBLE);
         popHolder.setVisibility(View.VISIBLE);
         nowHolder.setVisibility(View.VISIBLE);
