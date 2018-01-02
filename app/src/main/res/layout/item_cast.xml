@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="120dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="2">
 
     <ImageView
         android:id="@+id/castpic"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:scaleType="centerCrop"
-        android:minWidth="120dp"
-        android:background="@color/white" />
+        android:background="@color/white"/>
 
     <TextView
         android:id="@+id/castname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/blackColor"
         android:paddingTop="8dp"
-        android:textSize="12sp"
-        android:text="karen gillan"/>
+        android:text="karen gillan"
+        android:textColor="@color/blackColor"
+        android:textSize="12sp" />
 </LinearLayout>

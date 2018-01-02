@@ -79,11 +79,12 @@ public class AdapterTrailers extends RecyclerView.Adapter<AdapterTrailers.ViewHo
 
     public static void watchYoutubeVideo(Context context, String id) {
         Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
-        Intent webIntent = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("http://www.youtube.com/watch?v=" + id));
+        Intent webIntent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.youtube.com/watch?v=" + id));
         try {
+            appIntent.putExtra("force_fullscreen", true);
             context.startActivity(appIntent);
         } catch (ActivityNotFoundException ex) {
+            webIntent.putExtra("force_fullscreen", true);
             context.startActivity(webIntent);
         }
     }

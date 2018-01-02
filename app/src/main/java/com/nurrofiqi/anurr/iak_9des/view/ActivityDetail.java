@@ -199,7 +199,7 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
         mPresenter.setLink(casturl, 999);
 
         SnapHelper snapHelper = new GravitySnapHelper(Gravity.START);
-        SnapHelper snapHelper1 = new GravitySnapHelper(Gravity.START);
+        SnapHelper snapHelper1 = new LinearSnapHelper();
         SnapHelper snapHelper2 = new GravitySnapHelper(Gravity.START);
         SnapHelper snapHelper3 = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(similiarList);

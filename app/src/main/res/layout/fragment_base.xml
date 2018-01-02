@@ -74,10 +74,9 @@
                     android:id="@+id/nowlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
                     android:background="@color/white"
-                    android:elevation="4dp"
                     android:orientation="vertical"
                     android:paddingTop="16dp">
 
@@ -147,7 +146,7 @@
                         android:fontFamily="sans-serif-condensed"
                         android:foreground="?selectableItemBackground"
                         android:padding="@dimen/paddingStart"
-                        android:text="VIEW ALL"
+                        android:text="See All"
                         android:textAlignment="center"
                         android:textColor="@color/blackColor" />
 
@@ -157,10 +156,9 @@
                     android:id="@+id/popularlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
                     android:background="@color/white"
-                    android:elevation="4dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -216,7 +214,7 @@
                         android:fontFamily="sans-serif-condensed"
                         android:foreground="?selectableItemBackground"
                         android:padding="@dimen/paddingStart"
-                        android:text="VIEW ALL"
+                        android:text="See All"
                         android:textAlignment="center"
                         android:textColor="@color/blackColor" />
 
@@ -226,9 +224,8 @@
                     android:id="@+id/upcominglayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="2dp"
                     android:background="@color/white"
-                    android:elevation="4dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -284,7 +281,7 @@
                         android:fontFamily="sans-serif-condensed"
                         android:foreground="?selectableItemBackground"
                         android:padding="@dimen/paddingStart"
-                        android:text="VIEW ALL"
+                        android:text="See All"
                         android:textAlignment="center"
                         android:textColor="@color/blackColor" />
 

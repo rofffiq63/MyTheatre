@@ -38,7 +38,7 @@ public class AdapterCast extends RecyclerView.Adapter<AdapterCast.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final PojoCast.CastBean listitem = castData.get(position);
-        String url = "http://image.tmdb.org/t/p/h632" + listitem.getProfile_path();
+        String url = "http://image.tmdb.org/t/p/w185" + listitem.getProfile_path();
 
         Glide.with(context)
                 .load(url)

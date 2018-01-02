@@ -8,7 +8,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/appColor"
+        android:background="@color/white"
         app:elevation="4dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -96,12 +96,14 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
+        android:background="@color/appContrast"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="4dp"
+            android:background="@color/white"
+            android:layout_marginBottom="1dp"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -140,30 +142,22 @@
                     <CheckBox
                         android:id="@+id/favmark"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:button="@drawable/love_check"
+                        android:padding="8dp"
                         android:stateListAnimator="@animator/animator" />
-
-                    <View
-                        android:layout_width="16dp"
-                        android:layout_height="match_parent" />
 
                     <CheckBox
                         android:id="@+id/listmark"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:button="@drawable/bookmark_check"
+                        android:padding="8dp"
                         android:stateListAnimator="@animator/animator" />
 
                 </LinearLayout>
 
             </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/appContrast" />
-
 
         </LinearLayout>
 
@@ -178,12 +172,9 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:background="@color/white"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -250,7 +241,8 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:paddingTop="16dp">
 
                             <TextView
                                 android:id="@+id/rating"
@@ -312,6 +304,17 @@
 
                     </LinearLayout>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/genres"
                         android:layout_width="match_parent"
@@ -334,14 +337,6 @@
                         android:paddingTop="@dimen/paddingStart"
                         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_trailers" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -369,58 +364,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:nestedScrollingEnabled="false"
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:paddingTop="16dp"
-                            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                            app:spanCount="4"
                             tools:listitem="@layout/item_cast" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingTop="16dp"
-                            android:text="Reviews"
-                            android:textColor="@color/blackColor"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <View
-                            android:layout_width="24dp"
-                            android:layout_height="1dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:background="@color/appColor" />
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/reviewlist"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false"
-                            android:paddingTop="16dp" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/appContrast" />
-
-                        <TextView
-                            android:id="@+id/noreview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:fontFamily="sans-serif-condensed"
-                            android:foreground="?selectableItemBackground"
-                            android:padding="@dimen/paddingStart"
-                            android:text="VIEW ALL"
-                            android:textAlignment="center"
-                            android:textColor="@color/blackColor" />
 
                     </LinearLayout>
 
@@ -430,7 +378,62 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/paddingStart">
+                    android:background="@color/white"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginTop="1dp"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="16dp"
+                        android:text="Reviews"
+                        android:textColor="@color/blackColor"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/appColor" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/reviewlist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingTop="16dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/appContrast" />
+
+                    <TextView
+                        android:id="@+id/noreview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-condensed"
+                        android:foreground="?selectableItemBackground"
+                        android:padding="@dimen/paddingStart"
+                        android:text="See All"
+                        android:textAlignment="center"
+                        android:textColor="@color/blackColor" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginTop="1dp"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -470,7 +473,7 @@
                         android:fontFamily="sans-serif-condensed"
                         android:foreground="?selectableItemBackground"
                         android:padding="@dimen/paddingStart"
-                        android:text="VIEW ALL"
+                        android:text="See All"
                         android:textAlignment="center"
                         android:textColor="@color/blackColor" />
 
