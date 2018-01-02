@@ -30,7 +30,7 @@ public class ActivitySplash extends AppCompatActivity {
             public void run() {
                 checkFirstRun();
             }
-        }, 1000);
+        }, 500);
 
     }
 
@@ -64,7 +64,9 @@ public class ActivitySplash extends AppCompatActivity {
         if (currentVersionCode == savedVersionCode) {
 
             // This is just a normal run
-            presentActivity(iconSplash, ActivityMain.class);
+//            presentActivity(iconSplash, ActivityMain.class);
+            Intent intent = new Intent(this, ActivityMain.class);
+            startActivity(intent);
             return;
 
         } else if (savedVersionCode == DOESNT_EXIST) {

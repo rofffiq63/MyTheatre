@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/appContrast"
@@ -12,20 +13,6 @@
         android:animateLayoutChanges="true"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/genre_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/appColor"
-            android:clipToPadding="false"
-            android:nestedScrollingEnabled="false"
-            android:overScrollMode="never"
-            android:paddingEnd="12dp"
-            android:paddingStart="12dp"
-            android:paddingTop="?actionBarSize"
-            app:layout_collapseMode="pin"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways" />
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scrollview"
@@ -40,214 +27,292 @@
                 android:nestedScrollingEnabled="false"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:id="@+id/recommendlayout"
+                <RelativeLayout
+                    android:id="@+id/recommendedlayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/appColor"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/recommendedtext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:elevation="0dp"
+                        android:paddingBottom="8dp"
+                        android:paddingEnd="16dp"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:text="Recommended for You"
+                        android:textColor="@color/blackColor"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="176dp"
+                        android:layout_below="@id/recommendedtext"
+                        android:background="@color/white" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recommendedlist"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_below="@id/recommendedtext"
                         android:clipToPadding="false"
-                        android:paddingStart="6dp"
-                        android:paddingEnd="6dp"
                         android:nestedScrollingEnabled="false"
+                        android:orientation="horizontal"
                         android:overScrollMode="never"
                         android:paddingBottom="8dp"
-                        android:paddingTop="8dp" />
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_recommend" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/nowlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:elevation="4dp"
+                    android:orientation="vertical"
+                    android:paddingTop="16dp">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/genre_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        android:paddingEnd="14dp"
+                        android:paddingStart="14dp"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_genre" />
+
+                    <TextView
+                        android:id="@+id/nowtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/paddingStart"
+                        android:paddingStart="@dimen/paddingStart"
+                        android:paddingTop="@dimen/paddingStart"
+                        android:text="Now showing"
+                        android:textColor="@color/blackColor"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/paddingStart"
+                        android:background="@color/appColor" />
+
+                    <TextView
+                        android:id="@+id/nowsubtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/paddingStart"
+                        android:paddingStart="@dimen/paddingStart"
+                        android:text="you don't want to miss"
+                        android:textColor="@color/appAccent"
+                        android:textSize="12sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/nowlist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/paddingStart"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_main" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/appContrast" />
+
+                    <TextView
+                        android:id="@+id/nowmore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-condensed"
+                        android:foreground="?selectableItemBackground"
+                        android:padding="@dimen/paddingStart"
+                        android:text="VIEW ALL"
+                        android:textAlignment="center"
+                        android:textColor="@color/blackColor" />
 
                 </LinearLayout>
 
-                <android.support.v7.widget.CardView
+                <LinearLayout
+                    android:id="@+id/popularlayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginEnd="14dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    app:cardBackgroundColor="@color/white">
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:elevation="4dp"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/nowlayout"
+                    <TextView
+                        android:id="@+id/poptitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingBottom="8dp">
+                        android:paddingEnd="@dimen/paddingStart"
+                        android:paddingStart="@dimen/paddingStart"
+                        android:paddingTop="@dimen/paddingStart"
+                        android:text="Popular movies"
+                        android:textColor="@color/blackColor"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/nowtitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:paddingEnd="12dp"
-                            android:paddingStart="12dp"
-                            android:paddingTop="16dp"
-                            android:text="Now showing"
-                            android:textColor="#b3202020"
-                            android:textStyle="bold" />
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/paddingStart"
+                        android:background="@color/appColor" />
 
-                        <View
-                            android:layout_width="24dp"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="12dp"
-                            android:background="@color/redColor" />
-
-                        <TextView
-                            android:id="@+id/nowsubtitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="16dp"
-                            android:paddingStart="12dp"
-                            android:text="you don't want to miss"
-                            android:textSize="12sp" />
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/nowlist"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:clipToPadding="false"
-                            android:nestedScrollingEnabled="false"
-                            android:overScrollMode="never"
-                            android:paddingBottom="8dp"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp" />
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginEnd="14dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    app:cardBackgroundColor="@color/white">
-
-                    <LinearLayout
-                        android:id="@+id/popularlayout"
+                    <TextView
+                        android:id="@+id/popsubtitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingBottom="8dp">
+                        android:paddingBottom="@dimen/paddingStart"
+                        android:paddingStart="@dimen/paddingStart"
+                        android:text="all around the world"
+                        android:textColor="@color/appAccent"
+                        android:textSize="12sp" />
 
-                        <TextView
-                            android:id="@+id/poptitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:paddingEnd="12dp"
-                            android:paddingStart="12dp"
-                            android:paddingTop="16dp"
-                            android:text="Popular movies"
-                            android:textColor="#b3202020"
-                            android:textStyle="bold" />
-
-                        <View
-                            android:layout_width="24dp"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="12dp"
-                            android:background="@color/redColor" />
-
-                        <TextView
-                            android:id="@+id/popsubtitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="16dp"
-                            android:paddingStart="12dp"
-                            android:text="all around the world"
-                            android:textSize="12sp" />
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/poplist"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:clipToPadding="false"
-                            android:nestedScrollingEnabled="false"
-                            android:overScrollMode="never"
-                            android:paddingBottom="8dp"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp" />
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginEnd="14dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    app:cardBackgroundColor="@color/white">
-
-                    <LinearLayout
-                        android:id="@+id/upcominglayout"
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/poplist"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginBottom="@dimen/paddingStart"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_main" />
 
-                        <TextView
-                            android:id="@+id/uptitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:paddingEnd="12dp"
-                            android:paddingStart="12dp"
-                            android:paddingTop="16dp"
-                            android:text="Upcoming movies"
-                            android:textColor="#b3202020"
-                            android:textStyle="bold" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/appContrast" />
 
-                        <View
-                            android:layout_width="24dp"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="12dp"
-                            android:background="@color/redColor" />
+                    <TextView
+                        android:id="@+id/popmore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-condensed"
+                        android:foreground="?selectableItemBackground"
+                        android:padding="@dimen/paddingStart"
+                        android:text="VIEW ALL"
+                        android:textAlignment="center"
+                        android:textColor="@color/blackColor" />
 
-                        <TextView
-                            android:id="@+id/upsubtitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="16dp"
-                            android:paddingStart="12dp"
-                            android:text="brace yourself, movies is coming!"
-                            android:textSize="12sp" />
+                </LinearLayout>
 
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/uplist"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:clipToPadding="false"
-                            android:nestedScrollingEnabled="false"
-                            android:overScrollMode="never"
-                            android:paddingBottom="8dp"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp" />
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
-
-                <ProgressBar
-                    android:id="@+id/progresscircle"
+                <LinearLayout
+                    android:id="@+id/upcominglayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:indeterminate="true"
-                    android:indeterminateBehavior="repeat" />
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:elevation="4dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/uptitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/paddingStart"
+                        android:paddingStart="@dimen/paddingStart"
+                        android:paddingTop="@dimen/paddingStart"
+                        android:text="Upcoming movies"
+                        android:textColor="@color/blackColor"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/paddingStart"
+                        android:background="@color/appColor" />
+
+                    <TextView
+                        android:id="@+id/upsubtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/paddingStart"
+                        android:paddingStart="@dimen/paddingStart"
+                        android:text="be prepared!"
+                        android:textColor="@color/appAccent"
+                        android:textSize="12sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/uplist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/paddingStart"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_main" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/appContrast" />
+
+                    <TextView
+                        android:id="@+id/upmore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-condensed"
+                        android:foreground="?selectableItemBackground"
+                        android:padding="@dimen/paddingStart"
+                        android:text="VIEW ALL"
+                        android:textAlignment="center"
+                        android:textColor="@color/blackColor" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/progresscircle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="?actionBarSize"
+            android:indeterminate="true"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateTint="@color/appColor"
+            android:progressTint="@color/appColor" />
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android"
+    >
     <item android:state_checked="true"
         android:drawable="@drawable/ic_favorite_black_24dp" /> <!-- checked -->
     <item android:state_checked="false"
@@ -7,4 +8,12 @@
     <item android:state_focused="true"
         android:drawable="@drawable/ic_favorite_border_black_24dp" />    <!--on focus-->
     <item android:drawable="@drawable/ic_favorite_border_black_24dp" /> <!-- default -->
-</selector>
+
+    <transition
+        android:fromId="@+id/usual"
+        android:toId="@+id/selected" >
+        <animation-list>
+            <!--fill in your animation here-->
+        </animation-list>
+    </transition>
+</animated-selector>

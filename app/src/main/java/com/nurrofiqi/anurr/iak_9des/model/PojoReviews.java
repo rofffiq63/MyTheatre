@@ -10,10 +10,11 @@ import java.util.List;
  */
 
 public class PojoReviews {
+
     /**
-     * id : 324852
+     * id : 49013
      * page : 1
-     * results : [{"id":"59821cf8c3a3680d3201a5fb","author":"paulv","content":"Nothing will beat the first film. The originality fades with most sequels. Unfortunately this is more the rule rather than the exception. For the same reason, I hope they don't bother to create another \"Rango\". That was another fun and brilliant animation in my opinion. Kids will like it and by all means don't avoid it. Just don't have high expectations.","url":"https://www.themoviedb.org/review/59821cf8c3a3680d3201a5fb"}]
+     * results : [{"id":"52945ccb760ee378400f9d42","author":"Andres Gomez","content":"Lasseter is smart enough to tell us a completely different story than in the first movie. However, it is far from other titles like \"Toy Story\" or \"The Incredibles\".","url":"https://www.themoviedb.org/review/52945ccb760ee378400f9d42"}]
      * total_pages : 1
      * total_results : 1
      */
@@ -64,12 +65,12 @@ public class PojoReviews {
         this.results = results;
     }
 
-    public static class ResultsBean implements Parcelable {
+    public static class ResultsBean implements Parcelable{
         /**
-         * id : 59821cf8c3a3680d3201a5fb
-         * author : paulv
-         * content : Nothing will beat the first film. The originality fades with most sequels. Unfortunately this is more the rule rather than the exception. For the same reason, I hope they don't bother to create another "Rango". That was another fun and brilliant animation in my opinion. Kids will like it and by all means don't avoid it. Just don't have high expectations.
-         * url : https://www.themoviedb.org/review/59821cf8c3a3680d3201a5fb
+         * id : 52945ccb760ee378400f9d42
+         * author : Andres Gomez
+         * content : Lasseter is smart enough to tell us a completely different story than in the first movie. However, it is far from other titles like "Toy Story" or "The Incredibles".
+         * url : https://www.themoviedb.org/review/52945ccb760ee378400f9d42
          */
 
         private String id;

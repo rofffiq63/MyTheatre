@@ -5,245 +5,240 @@
     android:id="@+id/rootlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appContrast"
-    android:orientation="vertical"
+    android:background="@color/white"
+    android:descendantFocusability="afterDescendants"
     android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
     tools:context="com.nurrofiqi.anurr.iak_9des.view.ActivityMain">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/fragmentview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginBottom="42dp"
+        android:layout_marginTop="?actionBarSize"
+        android:background="@color/appContrast" />
+
+    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:elevation="2dp"
+        android:fitsSystemWindows="false"
+        app:itemBackground="@color/white"
+        app:itemIconTint="@color/selector"
+        app:menu="@menu/navigation" />
+
+    <View
+        android:id="@+id/darkdrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha=".6"
+        android:background="#101010"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/searchcontainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:fitsSystemWindows="true">
+
+        <ImageView
+            android:id="@+id/filter"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:adjustViewBounds="true"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_controls" />
 
         <RelativeLayout
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:id="@+id/searchchildcontainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/search_background">
 
-            <FrameLayout
-                android:id="@+id/fragmentview"
+            <LinearLayout
+                android:id="@+id/searchbase"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:minHeight="40dp">
 
-            <View
-                android:id="@+id/darkdrop"
+                <EditText
+                    android:id="@+id/search"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/float_transparent"
+                    android:hint="Ceritanya search"
+                    android:imeOptions="actionSearch"
+                    android:inputType="textVisiblePassword"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:textColor="#b3202020"
+                    android:textCursorDrawable="@null"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/clearsearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_multiply" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/catholder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/searchbase"
+                android:orientation="vertical"
+                android:paddingBottom="6dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#64202020" />
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-7dp"
+                    android:indeterminate="true"
+                    android:indeterminateBehavior="repeat"
+                    android:progress="50"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/inall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha=".7"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:paddingBottom="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:text="Avengers in All Categories"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/inmovies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha=".7"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:paddingBottom="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:text="Avengers in Movies"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/intv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha=".7"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackgroundBorderless"
+                    android:paddingBottom="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="8dp"
+                    android:text="Avengers in TV Series"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/instant_inmovies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/catholder"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/nothing"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:alpha=".6"
-                android:background="#101010"
-                android:clickable="true"
-                android:focusable="true"
+                android:alpha=".7"
+                android:gravity="center"
+                android:padding="42dp"
+                android:text="Nothing here, sorry :("
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 android:visibility="gone" />
 
             <LinearLayout
+                android:id="@+id/error"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:gravity="center"
+                android:padding="42dp"
+                android:visibility="gone">
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/searchbase"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="64dp"
-                    android:layout_marginEnd="14dp"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="8dp"
-                    android:animateLayoutChanges="true"
-                    app:cardBackgroundColor="#ffffff"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="0dp">
+                    android:alpha=".4"
+                    android:text="Something happen. Tap to retry"
+                    android:textAlignment="center"
+                    android:textColor="#202020"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:animateLayoutChanges="true"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:padding="12dp"
-                                android:src="@drawable/ic_search" />
-
-                            <EditText
-                                android:id="@+id/search"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:background="@color/float_transparent"
-                                android:hint="Ceritanya search anything"
-                                android:imeOptions="actionSearch"
-                                android:inputType="textVisiblePassword"
-                                android:maxLines="1"
-                                android:textColor="#b3202020"
-                                android:textCursorDrawable="@null"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-
-                            <ImageView
-                                android:id="@+id/clearsearch"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:padding="12dp"
-                                android:src="@drawable/ic_multiply" />
-
-                            <ImageView
-                                android:id="@+id/filter"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:clickable="true"
-                                android:foreground="?android:selectableItemBackgroundBorderless"
-                                android:padding="12dp"
-                                android:src="@drawable/ic_controls" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/catholder"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="#ffffff"
-                            android:orientation="vertical"
-                            android:paddingBottom="6dp">
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:background="#64202020" />
-
-                            <ProgressBar
-                                android:id="@+id/progress"
-                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="-7dp"
-                                android:indeterminate="true"
-                                android:indeterminateBehavior="repeat"
-                                android:progress="50"
-                                android:visibility="invisible" />
-
-                            <TextView
-                                android:id="@+id/inall"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:alpha=".7"
-                                android:clickable="true"
-                                android:foreground="?selectableItemBackgroundBorderless"
-                                android:paddingBottom="8dp"
-                                android:paddingEnd="8dp"
-                                android:paddingStart="12dp"
-                                android:paddingTop="8dp"
-                                android:text="Avengers in All Categories"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/inmovies"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:alpha=".7"
-                                android:clickable="true"
-                                android:foreground="?selectableItemBackgroundBorderless"
-                                android:paddingBottom="8dp"
-                                android:paddingEnd="8dp"
-                                android:paddingStart="12dp"
-                                android:paddingTop="8dp"
-                                android:text="Avengers in Movies"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/intv"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:alpha=".7"
-                                android:clickable="true"
-                                android:foreground="?selectableItemBackgroundBorderless"
-                                android:paddingBottom="8dp"
-                                android:paddingEnd="8dp"
-                                android:paddingStart="12dp"
-                                android:paddingTop="8dp"
-                                android:text="Avengers in TV Series"
-                                android:textSize="14sp" />
-
-                        </LinearLayout>
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/instant_inmovies"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:clipToPadding="false"
-                            android:nestedScrollingEnabled="false"
-                            android:overScrollMode="never"
-                            android:visibility="visible" />
-
-                        <TextView
-                            android:id="@+id/nothing"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:alpha=".7"
-                            android:gravity="center"
-                            android:padding="42dp"
-                            android:text="Nothing here, sorry :("
-                            android:textAlignment="center"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:visibility="gone" />
-
-                        <LinearLayout
-                            android:id="@+id/error"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:padding="42dp"
-                            android:visibility="gone">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:alpha=".4"
-                                android:text="Something happen. Tap to retry"
-                                android:textAlignment="center"
-                                android:textColor="#202020"
-                                android:textSize="14sp"
-                                android:textStyle="bold" />
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:paddingStart="4dp"
-                                android:src="@drawable/ic_autorenew_black_24dp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </android.support.v7.widget.CardView>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingStart="4dp"
+                    android:src="@drawable/ic_autorenew_black_24dp" />
 
             </LinearLayout>
 
         </RelativeLayout>
 
-        <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
-            android:id="@+id/navigation"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:elevation="2dp"
-            android:fitsSystemWindows="false"
-            app:elevation="2dp"
-            app:itemBackground="@color/white"
-            app:itemIconTint="@color/selector"
-            app:itemTextColor="@color/selector"
-            app:menu="@menu/navigation" />
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_user"
+            android:tint="@color/appColor"
+            android:visibility="visible" />
 
     </LinearLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

@@ -9,12 +9,31 @@ import java.util.List;
  * Created by anurr on 12/9/2017.
  */
 
-public class PojoAtMovies {
+public class PojoAtMovies implements Parcelable{
 
     private int page;
     private int total_results;
     private int total_pages;
     private List<ResultsBean> results;
+
+    protected PojoAtMovies(Parcel in) {
+        page = in.readInt();
+        total_results = in.readInt();
+        total_pages = in.readInt();
+        results = in.createTypedArrayList(ResultsBean.CREATOR);
+    }
+
+    public static final Creator<PojoAtMovies> CREATOR = new Creator<PojoAtMovies>() {
+        @Override
+        public PojoAtMovies createFromParcel(Parcel in) {
+            return new PojoAtMovies(in);
+        }
+
+        @Override
+        public PojoAtMovies[] newArray(int size) {
+            return new PojoAtMovies[size];
+        }
+    };
 
     public int getPage() {
         return page;
@@ -46,6 +65,19 @@ public class PojoAtMovies {
 
     public void setResults(List<ResultsBean> results) {
         this.results = results;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(page);
+        dest.writeInt(total_results);
+        dest.writeInt(total_pages);
+        dest.writeTypedList(results);
     }
 
     public static class ResultsBean implements Parcelable {

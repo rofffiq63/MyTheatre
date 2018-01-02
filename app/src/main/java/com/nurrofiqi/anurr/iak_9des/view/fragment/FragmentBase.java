@@ -15,6 +15,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -42,11 +44,7 @@ import butterknife.ButterKnife;
 
 public class FragmentBase extends android.support.v4.app.Fragment {
 
-    @BindView(R.id.recommendedlist)
-    RecyclerView recommendedList;
-
-    static RecyclerView genreList;
-    RecyclerView upcomingList, nowList, popularList;
+    static RecyclerView genreList, recommendedList, upcomingList, nowList, popularList;
 
     static ArrayList<PojoAtMovies.ResultsBean> recommendedArray, upArray, nowArray, popArray;
     static ArrayList<PojoAtSeries.ResultsBean> recommendedSeries, onSeries, todaySeries, popSeries;
@@ -56,14 +54,17 @@ public class FragmentBase extends android.support.v4.app.Fragment {
     static AdapterAtSeries adapterOnAirSeries, adapterTodaySeries, adapterPopSeries, adapterRecommSeries;
     static AdapterGenres adapterGenres;
 
-    static LinearLayout recommendHolder, nowHolder, popHolder, upHolder;
-    static ProgressBar progresscircle;
+    static LinearLayout nowHolder, popHolder, upHolder;
+    static RelativeLayout recommendedHolder;
+    static RelativeLayout progresscircle;
+
     TextView nowShowing, popular, upcoming, upsubtitle, popsubtitle, nowsubtitle;
     BottomNavigationViewEx bottomNavigationViewEx;
 
     String save = "save";
     int NORMAL_LAYOUT = 0;
     int RECOMMENDED_LAYOUT = 1;
+    static int resourceready = 0;
 
     @Nullable
     @Override
@@ -72,13 +73,14 @@ public class FragmentBase extends android.support.v4.app.Fragment {
         ButterKnife.bind(this, view);
 
         progresscircle = view.findViewById(R.id.progresscircle);
-        recommendHolder = view.findViewById(R.id.recommendlayout);
         upHolder = view.findViewById(R.id.upcominglayout);
         nowHolder = view.findViewById(R.id.nowlayout);
         popHolder = view.findViewById(R.id.popularlayout);
+        recommendedHolder = view.findViewById(R.id.recommendedlayout);
 
         genreList = view.findViewById(R.id.genre_list);
         upcomingList = view.findViewById(R.id.uplist);
+        recommendedList = view.findViewById(R.id.recommendedlist);
         nowList = view.findViewById(R.id.nowlist);
         popularList = view.findViewById(R.id.poplist);
         nowShowing = view.findViewById(R.id.nowtitle);
@@ -97,20 +99,12 @@ public class FragmentBase extends android.support.v4.app.Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recommendHolder.setVisibility(View.GONE);
+        progresscircle.setVisibility(View.VISIBLE);
+        recommendedHolder.setVisibility(View.GONE);
         genreList.setVisibility(View.GONE);
         upHolder.setVisibility(View.GONE);
         nowHolder.setVisibility(View.GONE);
         popHolder.setVisibility(View.GONE);
-
-        upHolder.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-            @Override
-            public void onSystemUiVisibilityChange(int i) {
-                if (i == 1) {
-                    popHolder.setVisibility(View.VISIBLE);
-                }
-            }
-        });
 
         initiateListView();
     }
@@ -123,11 +117,6 @@ public class FragmentBase extends android.support.v4.app.Fragment {
         outState.putParcelableArrayList(save, upArray);
         outState.putParcelableArrayList(save, popArray);
         outState.putParcelableArrayList(save, genreData);
-//        adapterRecomMovies.notifyDataSetChanged();
-//        adapterNowMovies.notifyDataSetChanged();
-//        adapterPopMovies.notifyDataSetChanged();
-//        adapterUpMovies.notifyDataSetChanged();
-//        adapterGenres.notifyDataSetChanged();
     }
 
     public static void watchYoutubeVideo(Context context, String id) {
@@ -153,19 +142,28 @@ public class FragmentBase extends android.support.v4.app.Fragment {
         switch (id) {
             case 0:
                 recommendedArray.addAll(moviesdata);
-                adapterRecommMovies.notifyDataSetChanged();
+                recommendedList.getAdapter().notifyDataSetChanged();
+                recommendedList.scheduleLayoutAnimation();
+
                 break;
             case 1:
                 upArray.addAll(moviesdata);
-                adapterUpMovies.notifyDataSetChanged();
+                upcomingList.getAdapter().notifyDataSetChanged();
+                upcomingList.scheduleLayoutAnimation();
+
                 break;
             case 2:
                 nowArray.addAll(moviesdata);
-                adapterNowMovies.notifyDataSetChanged();
+                nowList.getAdapter().notifyDataSetChanged();
+                nowList.scheduleLayoutAnimation();
+
                 break;
             case 3:
                 popArray.addAll(moviesdata);
-                adapterPopMovies.notifyDataSetChanged();
+                popularList.getAdapter().notifyDataSetChanged();
+                popularList.scheduleLayoutAnimation();
+                setVisible();
+
                 break;
             default:
                 break;
@@ -177,19 +175,28 @@ public class FragmentBase extends android.support.v4.app.Fragment {
         switch (id) {
             case 10:
                 recommendedSeries.addAll(seriesdata);
-                adapterRecommSeries.notifyDataSetChanged();
+                recommendedList.getAdapter().notifyDataSetChanged();
+                recommendedList.scheduleLayoutAnimation();
+
                 break;
             case 11:
                 onSeries.addAll(seriesdata);
-                adapterOnAirSeries.notifyDataSetChanged();
+                upcomingList.getAdapter().notifyDataSetChanged();
+                upcomingList.scheduleLayoutAnimation();
+
                 break;
             case 12:
                 todaySeries.addAll(seriesdata);
-                adapterTodaySeries.notifyDataSetChanged();
+                nowList.getAdapter().notifyDataSetChanged();
+                nowList.scheduleLayoutAnimation();
+
                 break;
             case 13:
                 popSeries.addAll(seriesdata);
-                adapterPopSeries.notifyDataSetChanged();
+                popularList.getAdapter().notifyDataSetChanged();
+                popularList.scheduleLayoutAnimation();
+                setVisible();
+
                 break;
             default:
                 break;
@@ -199,16 +206,22 @@ public class FragmentBase extends android.support.v4.app.Fragment {
 
     public static FragmentBase getGenre(List<PojoGenre.GenresBean> genredata) {
         genreData.addAll(genredata);
-        adapterGenres.notifyDataSetChanged();
-        genreList.setVisibility(View.VISIBLE);
+        genreList.getAdapter().notifyDataSetChanged();
+        genreList.scheduleLayoutAnimation();
+
         return new FragmentBase();
     }
 
     private void initiateListView() {
-        recommendedList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        nowList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL, false));
-        popularList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL, false));
-        upcomingList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL, false));
+        final Context context = recommendedList.getContext();
+        final LayoutAnimationController falldown =
+                AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation);
+
+        recommendedList.setLayoutAnimation(falldown);
+        nowList.setLayoutAnimation(falldown);
+        popularList.setLayoutAnimation(falldown);
+        upcomingList.setLayoutAnimation(falldown);
+        genreList.setLayoutAnimation(falldown);
 
         switch (bottomNavigationViewEx.getCurrentItem()) {
             case 0:
@@ -237,19 +250,18 @@ public class FragmentBase extends android.support.v4.app.Fragment {
                 upsubtitle.setText("airing series for next 7 days");
 
                 recommendedSeries = new ArrayList<>();
-                adapterRecommSeries = new AdapterAtSeries(getContext(), recommendedSeries, RECOMMENDED_LAYOUT);
-                recommendedList.setAdapter(adapterRecommSeries);
-
                 todaySeries = new ArrayList<>();
-                adapterTodaySeries = new AdapterAtSeries(getContext(), todaySeries, NORMAL_LAYOUT);
-                nowList.setAdapter(adapterTodaySeries);
-
                 popSeries = new ArrayList<>();
-                adapterPopSeries = new AdapterAtSeries(getContext(), popSeries, NORMAL_LAYOUT);
-                popularList.setAdapter(adapterPopSeries);
-
                 onSeries = new ArrayList<>();
+
+                adapterRecommSeries = new AdapterAtSeries(getContext(), recommendedSeries, RECOMMENDED_LAYOUT);
+                adapterTodaySeries = new AdapterAtSeries(getContext(), todaySeries, NORMAL_LAYOUT);
+                adapterPopSeries = new AdapterAtSeries(getContext(), popSeries, NORMAL_LAYOUT);
                 adapterOnAirSeries = new AdapterAtSeries(getContext(), onSeries, NORMAL_LAYOUT);
+
+                recommendedList.setAdapter(adapterRecommSeries);
+                nowList.setAdapter(adapterTodaySeries);
+                popularList.setAdapter(adapterPopSeries);
                 upcomingList.setAdapter(adapterOnAirSeries);
 
                 break;
@@ -272,23 +284,16 @@ public class FragmentBase extends android.support.v4.app.Fragment {
 
     public void setGenre() {
         genreData = new ArrayList<>();
-        adapterGenres = new AdapterGenres(getActivity().getApplicationContext(), genreData);
-        genreList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        adapterGenres = new AdapterGenres(getActivity().getApplicationContext(), genreData, null, 0);
         genreList.setAdapter(adapterGenres);
     }
 
-    public static FragmentBase setVisible() {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                recommendHolder.setVisibility(View.VISIBLE);
-            }
-        }, 1000);
+    public static void setVisible() {
+        recommendedHolder.setVisibility(View.VISIBLE);
+        genreList.setVisibility(View.VISIBLE);
         upHolder.setVisibility(View.VISIBLE);
         popHolder.setVisibility(View.VISIBLE);
         nowHolder.setVisibility(View.VISIBLE);
         progresscircle.setVisibility(View.GONE);
-        return new FragmentBase();
     }
 }

@@ -10,11 +10,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.nurrofiqi.anurr.iak_9des.model.PojoCast;
 import com.nurrofiqi.anurr.iak_9des.model.PojoDetail;
 import com.nurrofiqi.anurr.iak_9des.model.PojoGenre;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtMovies;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtSeries;
 import com.nurrofiqi.anurr.iak_9des.model.PojoMultiSearch;
+import com.nurrofiqi.anurr.iak_9des.model.PojoReviews;
 
 import static com.android.volley.Request.Method;
 
@@ -40,13 +42,9 @@ public class MainActivityDataRemote implements MainActivityDataResource {
         StringRequest stringRequest = new StringRequest(Method.GET, String.valueOf(url), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                final PojoAtMovies pojoAtMovies = new Gson().fromJson(response, PojoAtMovies.class);
-                final PojoGenre pojoGenre = new Gson().fromJson(response, PojoGenre.class);
-                final PojoMultiSearch pojoMultiSearch = new Gson().fromJson(response, PojoMultiSearch.class);
-                final PojoAtSeries pojoAtSeries = new Gson().fromJson(response, PojoAtSeries.class);
-                final PojoDetail pojoDetail = new Gson().fromJson(response, PojoDetail.class);
 
                 if (id == 0 || id == 1 || id == 2 || id == 3) {
+                    final PojoAtMovies pojoAtMovies = new Gson().fromJson(response, PojoAtMovies.class);
                     if (pojoAtMovies == null) {
                         mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
                     } else {
@@ -54,6 +52,7 @@ public class MainActivityDataRemote implements MainActivityDataResource {
                     }
 
                 } else if (id == 10 || id == 11 || id == 12 || id == 13) {
+                    final PojoAtSeries pojoAtSeries = new Gson().fromJson(response, PojoAtSeries.class);
                     if (pojoAtSeries == null) {
                         mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
                     } else {
@@ -61,6 +60,7 @@ public class MainActivityDataRemote implements MainActivityDataResource {
                     }
 
                 } else if (id == 4 || id == 14) {
+                    final PojoGenre pojoGenre = new Gson().fromJson(response, PojoGenre.class);
                     if (pojoGenre == null) {
                         mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
                     } else {
@@ -68,13 +68,23 @@ public class MainActivityDataRemote implements MainActivityDataResource {
                     }
 
                 } else if (id == 5) {
+                    final PojoMultiSearch pojoMultiSearch = new Gson().fromJson(response, PojoMultiSearch.class);
                     if (pojoMultiSearch == null) {
                         mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
                     } else {
                         mainActivityGetCallBack.successSearch(pojoMultiSearch.getResults());
                     }
 
+                } else if (id == 6) {
+                    final PojoReviews pojoReviews = new Gson().fromJson(response, PojoReviews.class);
+                    if (pojoReviews == null) {
+                        mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
+                    } else {
+                        mainActivityGetCallBack.successReview(pojoReviews.getResults());
+                    }
+//
                 } else if (id == 9) {
+                    final PojoDetail pojoDetail = new Gson().fromJson(response, PojoDetail.class);
                     if (pojoDetail == null) {
                         mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
                     } else {
@@ -84,7 +94,16 @@ public class MainActivityDataRemote implements MainActivityDataResource {
                                 pojoDetail.getOverview(), pojoDetail.getPopularity(), pojoDetail.getPoster_path(),
                                 pojoDetail.getBackdrop_path(), pojoDetail.getRelease_date(), pojoDetail.getRevenue(),
                                 pojoDetail.getRuntime(), pojoDetail.getStatus(), pojoDetail.getTagline(),
-                                pojoDetail.getVote_average(), pojoDetail.getVote_count(), pojoDetail.getOriginal_language());
+                                pojoDetail.getVote_average(), pojoDetail.getVote_count(), pojoDetail.getOriginal_language(), pojoDetail.getImages().getBackdrops(), pojoDetail.getImages().getPosters(),
+                                pojoDetail.getVideos().getResults());
+                    }
+
+                } else if (id == 999) {
+                    final PojoCast pojoCast = new Gson().fromJson(response, PojoCast.class);
+                    if (pojoCast == null) {
+                        mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
+                    } else {
+                        mainActivityGetCallBack.successCast(pojoCast.getCast());
                     }
                 } else {
                     Toast.makeText(context, "ID not registered. Nothing requested", Toast.LENGTH_SHORT).show();

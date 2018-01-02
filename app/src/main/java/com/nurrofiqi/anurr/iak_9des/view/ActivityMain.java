@@ -2,6 +2,7 @@ package com.nurrofiqi.anurr.iak_9des.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -34,13 +35,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.nurrofiqi.anurr.iak_9des.R;
+import com.nurrofiqi.anurr.iak_9des.model.PojoCast;
 import com.nurrofiqi.anurr.iak_9des.model.PojoDetail;
 import com.nurrofiqi.anurr.iak_9des.model.PojoGenre;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtMovies;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtSeries;
 import com.nurrofiqi.anurr.iak_9des.model.PojoMultiSearch;
+import com.nurrofiqi.anurr.iak_9des.model.PojoReviews;
 import com.nurrofiqi.anurr.iak_9des.presenter.MainActivityContract;
 import com.nurrofiqi.anurr.iak_9des.presenter.MainActivityPresenter;
 import com.nurrofiqi.anurr.iak_9des.presenter.MainActivityRepoInject;
@@ -61,21 +66,40 @@ import butterknife.ButterKnife;
 public class ActivityMain extends AppCompatActivity implements MainActivityContract.View {
 
 
-
-    @BindView(R.id.rootlayout) CoordinatorLayout rootLayout;
-    @BindView(R.id.instant_inmovies) RecyclerView searchList;
-    @BindView(R.id.catholder) LinearLayout mcatholder;
-    @BindView(R.id.error) LinearLayout merror;
-    @BindView(R.id.nothing) TextView nothing;
-    @BindView(R.id.inmovies) TextView inmovies;
-    @BindView(R.id.intv) TextView intv;
-    @BindView(R.id.inall) TextView inall;
-    @BindView(R.id.search) EditText msearch;
-    @BindView(R.id.clearsearch) ImageView clearsearch;
-    @BindView(R.id.filter) ImageView filterbut;
-    @BindView(R.id.progress) ProgressBar progressBar;
-    @BindView(R.id.darkdrop) View darkDrop;
-    @BindView(R.id.navigation) BottomNavigationViewEx bottomNavigationView;
+    @BindView(R.id.rootlayout)
+    CoordinatorLayout rootLayout;
+    @BindView(R.id.instant_inmovies)
+    RecyclerView searchList;
+    @BindView(R.id.catholder)
+    LinearLayout mcatholder;
+    @BindView(R.id.searchbase)
+    LinearLayout searchBase;
+    @BindView(R.id.searchcontainer)
+    LinearLayout searchContainer;
+    @BindView(R.id.searchchildcontainer)
+    RelativeLayout searchChildContainer;
+    @BindView(R.id.error)
+    LinearLayout merror;
+    @BindView(R.id.nothing)
+    TextView nothing;
+    @BindView(R.id.inmovies)
+    TextView inmovies;
+    @BindView(R.id.intv)
+    TextView intv;
+    @BindView(R.id.inall)
+    TextView inall;
+    @BindView(R.id.search)
+    EditText msearch;
+    @BindView(R.id.clearsearch)
+    ImageView clearsearch;
+    @BindView(R.id.filter)
+    ImageView filterbut;
+    @BindView(R.id.profile)
+    ImageView accountpic;
+    @BindView(R.id.darkdrop)
+    View darkDrop;
+    @BindView(R.id.navigation)
+    BottomNavigationViewEx bottomNavigationView;
 
     MainActivityPresenter mainActivityPresenter;
     ArrayList<PojoMultiSearch.ResultsBean> searchData;
@@ -150,37 +174,29 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
         searchList.setVisibility(View.GONE);
         darkDrop.setVisibility(View.GONE);
 
+        LayoutTransition transition = searchContainer.getLayoutTransition();
+        transition.enableTransitionType(LayoutTransition.CHANGING);
+
         //        REVEAL ANIMATION
-        final Intent intent = getIntent();
-        if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-                intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) &&
-                intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
+//        final Intent intent = getIntent();
+//        if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
+//                intent.hasExtra(EXTRA_CIRCULAR_REVEAL_X) &&
+//                intent.hasExtra(EXTRA_CIRCULAR_REVEAL_Y)) {
+//
+//            revealX = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_X, 0);
+//            revealY = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y, 0);
 
-            revealX = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_X, 0);
-            revealY = intent.getIntExtra(EXTRA_CIRCULAR_REVEAL_Y, 0);
-
-            ViewTreeObserver viewTreeObserver = rootLayout.getViewTreeObserver();
-            if (viewTreeObserver.isAlive()) {
-                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        revealActivity(revealX, revealY);
-                        rootLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    }
-                });
-            }
-        }
-
-        mainActivityPresenter = new MainActivityPresenter(MainActivityRepoInject.provideToMainRepo(getApplicationContext()));
-        mainActivityPresenter.onAttachView(this);
-
-        darkDrop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cleanSearch();
-                keyboardGone();
-            }
-        });
+//            ViewTreeObserver viewTreeObserver = rootLayout.getViewTreeObserver();
+//            if (viewTreeObserver.isAlive()) {
+//                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//                    @Override
+//                    public void onGlobalLayout() {
+//                        revealActivity(revealX, revealY);
+//                        rootLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//                    }
+//                });
+//            }
+//        }
 
         KeyboardVisibilityEvent.setEventListener(
                 this,
@@ -188,11 +204,22 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
                     @Override
                     public void onVisibilityChanged(boolean isOpen) {
                         if (!isOpen) {
-                            cleanSearch();
+                            keyboardGone();
                         }
                         // some code depending on keyboard visiblity status
                     }
                 });
+
+        mainActivityPresenter = new MainActivityPresenter(MainActivityRepoInject.provideToMainRepo(getApplicationContext()));
+        mainActivityPresenter.onAttachView(this);
+
+        darkDrop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                msearch.setText("");
+                keyboardGone();
+            }
+        });
 
         merror.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,8 +238,15 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
         msearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (msearch.isFocused()) {
+                if (msearch.hasFocus()) {
                     darkDrop.setVisibility(View.VISIBLE);
+                    accountpic.setVisibility(View.GONE);
+                    filterbut.setVisibility(View.GONE);
+                } else {
+                    msearch.setText("");
+                    accountpic.setVisibility(View.VISIBLE);
+                    darkDrop.setVisibility(View.GONE);
+                    filterbut.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -242,23 +276,23 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
                 handler.removeCallbacks(finishChecker);
                 nothing.setVisibility(View.GONE);
                 merror.setVisibility(View.GONE);
-                searchList.setVisibility(View.GONE);
+//                searchList.setVisibility(View.GONE);
 
                 String livetext = String.valueOf(msearch.getText());
                 inall.setText(Html.fromHtml("<b>" + livetext + "</b> in All Categories"));
                 inmovies.setText(Html.fromHtml("<b>" + livetext + "</b> in Movies"));
                 intv.setText(Html.fromHtml("<b>" + livetext + "</b> in TV Series"));
 
-                if (msearch.length() == 0) {
-                    mcatholder.setVisibility(View.GONE);
-                    clearsearch.setVisibility(View.GONE);
-                    filterbut.setVisibility(View.VISIBLE);
-                } else {
+                if (msearch.length() > 0) {
                     mcatholder.setVisibility(View.VISIBLE);
                     clearsearch.setVisibility(View.VISIBLE);
                     nothing.setVisibility(View.GONE);
                     merror.setVisibility(View.GONE);
-                    filterbut.setVisibility(View.GONE);
+                    setSearch();
+                } else {
+                    clearsearch.setVisibility(View.GONE);
+                    mcatholder.setVisibility(View.GONE);
+                    searchList.setVisibility(View.GONE);
                 }
             }
 
@@ -266,7 +300,7 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
             public void afterTextChanged(Editable s) {
                 if (msearch.length() != 0) {
                     last_text_edit = System.currentTimeMillis();
-                    handler.postDelayed(finishChecker, delay);
+//                    handler.postDelayed(finishChecker, delay);
                 }
             }
         });
@@ -274,13 +308,12 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
         bottomNavigationView.enableShiftingMode(false);
         bottomNavigationView.enableItemShiftingMode(false);
         bottomNavigationView.enableAnimation(false);
-        bottomNavigationView.setSmallTextSize(12);
+        bottomNavigationView.setTextVisibility(false);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_movies:
-                        handler.removeCallbacks(progressCircle);
                         openFragment(fragmentBase, FRAGMENT_BASE);
                         reqLink(GENRE_MOVIES);
                         reqLink(RECOMMENDED_MOVIES);
@@ -289,7 +322,6 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
                         reqLink(POP_MOVIES);
                         break;
                     case R.id.navigation_series:
-                        handler.removeCallbacks(progressCircle);
                         openFragment(fragmentBase, FRAGMENT_BASE);
                         reqLink(GENRE_SERIES);
                         reqLink(RECOMMENDED_SERIES);
@@ -311,6 +343,11 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
         });
 
         bottomNavigationView.setCurrentItem(0);
+
+        searchData = new ArrayList<>();
+        adapterSearch = new AdapterSearch(ActivityMain.this, searchData);
+        searchList.setLayoutManager(new LinearLayoutManager(this));
+        searchList.setAdapter(adapterSearch);
     }
 
     private void revealActivity(int x, int y) {
@@ -380,40 +417,25 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
         }
     };
 
-    private Runnable progressCircle = new Runnable() {
-        @Override
-        public void run() {
-            FragmentBase.setVisible();
-        }
-    };
-
-
-    void cleanSearch() {
-        if (msearch.length() != 0) {
-            msearch.setText("");
-        }
-        msearch.clearFocus();
-        darkDrop.setVisibility(View.GONE);
-    }
-
     void keyboardGone() {
         View view = this.getCurrentFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        rootLayout.requestFocus();
     }
 
     public void setSearch() {
-        progressBar.setVisibility(View.VISIBLE);
-        String searchm;
-        searchm = String.valueOf(msearch.getText());
-        searchm = searchm.replaceAll(" ", "%20");
-        searchm = "https://api.themoviedb.org/3/search/multi?api_key=" + API_KEY + "&query=" +
-                searchm + "&language=en-US&page=1&include_adult=false";
-        searchData = new ArrayList<>();
-        adapterSearch = new AdapterSearch(ActivityMain.this, searchData);
-        searchList.setLayoutManager(new LinearLayoutManager(this));
-        searchList.setAdapter(adapterSearch);
-        mainActivityPresenter.setLink(searchm, SEARCH);
+//        progressBar.setVisibility(View.VISIBLE);
+        if (msearch.length() != 0) {
+            String searchm;
+            searchm = String.valueOf(msearch.getText());
+            searchm = searchm.replaceAll(" ", "%20");
+            searchm = "https://api.themoviedb.org/3/search/multi?api_key=" + API_KEY + "&query=" +
+                    searchm + "&language=en-US&page=1&include_adult=false";
+            mainActivityPresenter.setLink(searchm, SEARCH);
+        } else {
+            searchList.setVisibility(View.GONE);
+        }
     }
 
     public void reqLink(int id) {
@@ -430,7 +452,7 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
         String url = null;
         switch (id) {
             case RECOMMENDED_MOVIES:
-                url = "https://api.themoviedb.org/3/movie/260514/recommendations?api_key=" +
+                url = "https://api.themoviedb.org/3/movie/177572/recommendations?api_key=" +
                         API_KEY + "&language=en-US&page=" + String.valueOf(pagecount);
                 break;
             case NOW_MOVIES:
@@ -476,34 +498,22 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        //outState.putParcelableArrayList(save, upcomingData);
-        //upcomingAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void successMainSeries(List<PojoAtSeries.ResultsBean> mainseriesdata, int id) {
         FragmentBase.getSeriesData(mainseriesdata, id);
-        if (mainseriesdata != null) {
-            handler.postDelayed(progressCircle, delay);
-        }
     }
 
     @Override
     public void successMainMovies(List<PojoAtMovies.ResultsBean> mainmoviesdata, int id) {
         FragmentBase.getMoviesData(mainmoviesdata, id);
-        if (mainmoviesdata != null) {
-            handler.postDelayed(progressCircle, delay);
-        }
     }
 
     @Override
-    public void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres, List<PojoDetail.ProductionCompaniesBean> product,
-                              String homepage, String original_title, String title,
-                              String overview, double popularity, String poster, String backdrop,
-                              String date, int revenue, int runtime, String status, String tagline,
-                              double rate, int vote, String language) {
+    public void successDetail(int id, int budget, List<PojoDetail.GenresBean> genres, List<PojoDetail.ProductionCompaniesBean> product, String homepage, String original_title, String title, String overview, double popularity, String poster, String backdrop, String date, int revenue, int runtime, String status, String tagline, double rate, int vote, String language, List<PojoDetail.ImagesBean.BackdropsBean> backdropsdata, List<PojoDetail.ImagesBean.PostersBean> posterdata, List<PojoDetail.VideosBean.ResultsBean> videosdata) {
+
+    }
+
+    @Override
+    public void successCast(List<PojoCast.CastBean> castdata) {
 
     }
 
@@ -514,35 +524,36 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
 
     @Override
     public void successOnSearch(final List<PojoMultiSearch.ResultsBean> searchdata) {
+        this.searchData.clear();
         this.searchData.addAll(searchdata);
         Handler mhandler = new Handler();
         mhandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                progressBar.setVisibility(View.INVISIBLE);
+//                progressBar.setVisibility(View.INVISIBLE);
                 if (searchdata == null) {
                     nothing.setVisibility(View.VISIBLE);
                     mcatholder.setVisibility(View.GONE);
                 } else {
-                    adapterSearch.notifyDataSetChanged();
-                    searchList.setVisibility(View.VISIBLE);
+                    if (msearch.length() != 0) {
+                        adapterSearch.notifyDataSetChanged();
+                        searchList.setVisibility(View.VISIBLE);
+                    } else {
+                        searchList.setVisibility(View.GONE);
+                    }
                 }
             }
         }, 300);
     }
 
     @Override
-    public void onError(String msg) {
-        progressBar.setVisibility(View.INVISIBLE);
-        merror.setVisibility(View.VISIBLE);
-        mcatholder.setVisibility(View.GONE);
-        searchList.setVisibility(View.GONE);
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    public void successReview(List<PojoReviews.ResultsBean> reviewdata) {
+
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
+    public void onError(String msg) {
+
     }
+
 }

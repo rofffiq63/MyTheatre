@@ -59,12 +59,9 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
                 holder.judul.setText(listitem.getTitle());
                 holder.tahun.setText(Html.fromHtml(oriDate + " " + kind));
-                holder.rating.setText(String.valueOf(voteAvg));
-                //holder.overview.setText(listitem.getOverview());
 
                 Glide.with(context)
                         .load(poster)
-                        .placeholder(R.drawable.ic_movie_black_24dp)
                         .into(holder.smallposter);
                 break;
 
@@ -80,7 +77,6 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
                 holder.judul.setText(listitem.getOriginal_name());
                 holder.tahun.setText(Html.fromHtml(oriDate + " " + kind));
-                holder.rating.setText(String.valueOf(voteAvg));
 
                 Glide.with(context)
                         .load(poster)
@@ -93,7 +89,6 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
                 holder.judul.setText(listitem.getName());
                 holder.tahun.setText(Html.fromHtml(kind));
-                holder.rating.setText("");
 
                 Glide.with(context)
                         .load(poster)
@@ -102,16 +97,13 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
         }
 
         final String finalOriDate = oriDate;
+        final String mediatype = listitem.getMedia_type().toUpperCase();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent toDetail = new Intent(context, ActivityDetail.class);
                 toDetail.putExtra("ids", listitem.getId());
-                toDetail.putExtra("title", holder.judul.getText());
-                toDetail.putExtra("tahun", finalOriDate);
-                toDetail.putExtra("overview", listitem.getOverview());
-                toDetail.putExtra("backdrop", listitem.getBackdrop_path());
-                toDetail.putExtra("poster", listitem.getPoster_path());
+                toDetail.putExtra("media", mediatype);
                 v.getContext().startActivity(toDetail);
             }
         });
@@ -119,8 +111,8 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
     @Override
     public int getItemCount() {
-        if (search.size() > 3) {
-            return (null != search ? 3 : 0);
+        if (search.size() > 5) {
+            return (null != search ? 5 : 0);
         } else {
             return (null != search ? search.size() : 0);
         }
@@ -128,16 +120,14 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView judul, rating, tahun, overview;
+        TextView judul, tahun;
         ImageView smallposter;
 
         public ViewHolder(View itemView) {
             super(itemView);
             judul = itemView.findViewById(R.id.judul);
-            rating = itemView.findViewById(R.id.rating);
             tahun = itemView.findViewById(R.id.tahun);
             smallposter = itemView.findViewById(R.id.smallposter);
-            overview = itemView.findViewById(R.id.overview);
         }
     }
 }
