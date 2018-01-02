@@ -43,6 +43,7 @@ public class AdapterCast extends RecyclerView.Adapter<AdapterCast.ViewHolder> {
         Glide.with(context)
                 .load(url)
                 .crossFade()
+                .placeholder(R.drawable.ic_person_black_24dp)
                 .into(holder.castPic);
 
         holder.castName.setText(Html.fromHtml("<b>" + listitem.getName() + "</b><br>as " + listitem.getCharacter()));
