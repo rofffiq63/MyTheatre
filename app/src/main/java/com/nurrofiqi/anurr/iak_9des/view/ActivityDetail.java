@@ -226,7 +226,7 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
                               String original_title, String title, String overview, double popularity,
                               String poster, String backdrop, String date, int revenue, int runtime,
                               String status, String tagline, double rate, int vote, String language,
-                              List<PojoDetail.ImagesBean.BackdropsBean> backdropsdata, List<PojoDetail.ImagesBean.PostersBean> posterdata,
+                              final List<PojoDetail.ImagesBean.BackdropsBean> backdropsdata, List<PojoDetail.ImagesBean.PostersBean> posterdata,
                               List<PojoDetail.VideosBean.ResultsBean> videosdata) {
 
         String item;
@@ -236,6 +236,7 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
         trailerlist.getAdapter().notifyDataSetChanged();
         genreslist.getAdapter().notifyDataSetChanged();
         backdropList.getAdapter().notifyDataSetChanged();
+        backdropList.scrollToPosition(backdropsdata.size()-1);
         progressHolder.setVisibility(View.GONE);
         Toast.makeText(this, "Total trailers: " + videosdata.size(), Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "Total backdrops: " + backdropsdata.size(), Toast.LENGTH_SHORT).show();
@@ -294,7 +295,20 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
 
         Glide.with(this)
                 .load("http://image.tmdb.org/t/p/w342" + poster)
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        backdropList.smoothScrollToPosition(0);
+                        return false;
+                    }
+                })
                 .into(mposter);
+
     }
 
     @Override

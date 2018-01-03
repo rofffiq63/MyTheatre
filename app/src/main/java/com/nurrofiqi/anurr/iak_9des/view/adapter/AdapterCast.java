@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.nurrofiqi.anurr.iak_9des.R;
 import com.nurrofiqi.anurr.iak_9des.model.PojoCast;
+import com.nurrofiqi.anurr.iak_9des.view.CircleGlide;
 
 import java.util.List;
 
@@ -36,14 +38,18 @@ public class AdapterCast extends RecyclerView.Adapter<AdapterCast.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final PojoCast.CastBean listitem = castData.get(position);
+
         String url = "http://image.tmdb.org/t/p/w185" + listitem.getProfile_path();
 
         Glide.with(context)
                 .load(url)
                 .crossFade()
-                .placeholder(R.drawable.ic_person_black_24dp)
+                .thumbnail(0.5f)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .bitmapTransform(new CircleGlide(context))
+                .placeholder(R.drawable.ic_account_circle_black_24dp)
                 .into(holder.castPic);
 
         holder.castName.setText(Html.fromHtml("<b>" + listitem.getName() + "</b><br>as " + listitem.getCharacter()));

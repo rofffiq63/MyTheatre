@@ -17,8 +17,9 @@
             android:layout_height="match_parent"
             app:collapsedTitleTextAppearance="@style/collapsedappbar"
             app:contentScrim="@color/appColor"
+            app:statusBarScrim="@color/appColor"
             app:expandedTitleTextAppearance="@style/expandedappbar"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
             app:title="Detail">
 
             <android.support.v7.widget.RecyclerView
@@ -26,6 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:clickable="true"
+                android:focusable="true"
                 android:orientation="horizontal"
                 android:overScrollMode="never"
                 app:layoutManager="android.support.v7.widget.LinearLayoutManager"
@@ -94,16 +97,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/appContrast"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
-        android:background="@color/appContrast"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_marginBottom="1dp"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -254,7 +257,7 @@
                                 android:textSize="52sp" />
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:layout_marginBottom="4dp"
@@ -297,6 +300,13 @@
                                         android:textSize="12sp" />
 
                                 </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
 
                             </LinearLayout>
 
@@ -364,10 +374,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:nestedScrollingEnabled="false"
-                            android:orientation="vertical"
+                            android:orientation="horizontal"
                             android:paddingTop="16dp"
-                            app:layoutManager="android.support.v7.widget.GridLayoutManager"
-                            app:spanCount="4"
+                            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                             tools:listitem="@layout/item_cast" />
 
                     </LinearLayout>
@@ -377,10 +386,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="@color/white"
                     android:layout_marginBottom="1dp"
                     android:layout_marginTop="1dp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
                     android:padding="16dp">
 
                     <TextView
@@ -429,9 +438,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:layout_marginBottom="1dp"
                     android:layout_marginTop="1dp"
+                    android:background="@color/white"
                     android:orientation="vertical"
                     android:padding="16dp">
 
