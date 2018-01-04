@@ -4,8 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appColor"
+    android:background="@color/white"
     tools:context="com.nurrofiqi.anurr.iak_9des.view.ActivitySplash">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/content_background"
+        android:tint="@color/appColor"
+        />
 
     <ImageView
         android:id="@+id/iconsplash"

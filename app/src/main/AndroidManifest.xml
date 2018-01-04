@@ -25,7 +25,7 @@
         <activity
             android:name=".view.ActivitySplash"
             android:noHistory="true"
-            android:theme="@style/MyTheme" >
+            android:theme="@style/MyDetail" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

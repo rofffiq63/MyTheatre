@@ -1,9 +1,7 @@
 package com.nurrofiqi.anurr.iak_9des.view;
 
-import android.animation.StateListAnimator;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
@@ -15,13 +13,12 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -45,8 +42,6 @@ import com.nurrofiqi.anurr.iak_9des.view.adapter.AdapterCast;
 import com.nurrofiqi.anurr.iak_9des.view.adapter.AdapterGenres;
 import com.nurrofiqi.anurr.iak_9des.view.adapter.AdapterReviews;
 import com.nurrofiqi.anurr.iak_9des.view.adapter.AdapterTrailers;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -108,6 +103,8 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
     TextView mrelease;
     @BindView(R.id.castlist)
     RecyclerView castList;
+    @BindView(R.id.reviewholder)
+    LinearLayout reviewHolder;
 
     ArrayList<PojoAtMovies.ResultsBean> similiarData;
     ArrayList<PojoReviews.ResultsBean> reviewsData;
@@ -332,10 +329,9 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
         this.reviewsData.addAll(reviewdata);
         adapterReviews.notifyDataSetChanged();
         if (reviewdata.isEmpty()) {
-            noreview.setText("No Review");
-            noreview.setEnabled(false);
+            reviewHolder.setVisibility(View.GONE);
         } else {
-            noreview.setText("View all " + reviewdata.size() + " Reviews");
+            noreview.setText("See all " + reviewdata.size() + " Reviews");
         }
     }
 

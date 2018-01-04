@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">@color/appColor</color>
+    <color name="colorPrimaryDark">@color/appColor</color>
     <color name="purpleColor">#7E57C2</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="appColor">#FF5722</color>
+    <color name="appColor">#EC407A</color>
     <color name="appAccent">#212121</color>
     <color name="appContrast">#eaeaea</color>
     <color name="textColor">#121212</color>
