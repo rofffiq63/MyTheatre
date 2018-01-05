@@ -29,9 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:adjustViewBounds="true"
-        android:alpha=".8"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_play_arrow_black_24dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_music_player_play"
         android:tint="@color/white"
         app:elevation="0dp"
         app:fabSize="mini" />

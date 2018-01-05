@@ -245,6 +245,10 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
             arraycompanies[i] = item;
         }
 
+        if (backdropsdata.size() == 0){
+            collapsingToolbarLayout.setBackgroundColor(getResources().getColor(R.color.appColor));
+        }
+
         float rating;
         rating = Float.valueOf(String.valueOf(rate));
         rating = rating / 2;

@@ -13,11 +13,6 @@
                 android:propertyName="scaleY"
                 android:valueTo="0.3"
                 android:valueType="floatType" />
-            <objectAnimator
-                android:duration="0"
-                android:propertyName="translationZ"
-                android:valueTo="4dp"
-                android:valueType="floatType" />
 
             <objectAnimator
                 android:duration="200"
@@ -31,12 +26,7 @@
                 android:startOffset="0"
                 android:valueTo="1.0"
                 android:valueType="floatType" />
-            <objectAnimator
-                android:duration="200"
-                android:propertyName="translationZ"
-                android:startOffset="0"
-                android:valueTo="0dp"
-                android:valueType="floatType" />
+
         </set>
 
     </item>
@@ -53,11 +43,7 @@
                 android:propertyName="scaleY"
                 android:valueTo="0.3"
                 android:valueType="floatType" />
-            <objectAnimator
-                android:duration="0"
-                android:propertyName="translationZ"
-                android:valueTo="4dp"
-                android:valueType="floatType" />
+
 
             <objectAnimator
                 android:duration="200"
@@ -71,12 +57,7 @@
                 android:startOffset="0"
                 android:valueTo="1.0"
                 android:valueType="floatType" />
-            <objectAnimator
-                android:duration="200"
-                android:propertyName="translationZ"
-                android:startOffset="0"
-                android:valueTo="0dp"
-                android:valueType="floatType" />
+
         </set>
     </item>
 </selector>
