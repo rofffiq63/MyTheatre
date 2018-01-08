@@ -36,8 +36,8 @@
         android:id="@+id/darkdrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha=".6"
-        android:background="#101010"
+        android:alpha=".8"
+        android:background="@color/white"
         android:clickable="true"
         android:focusable="true"
         android:visibility="gone" />

@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">@color/appColor</color>
     <color name="purpleColor">#7E57C2</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="appColor">#EC407A</color>
+    <color name="appColor">@color/blackColor</color>
     <color name="appAccent">#212121</color>
     <color name="appContrast">#eaeaea</color>
     <color name="textColor">#121212</color>
