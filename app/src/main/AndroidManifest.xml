@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.nurrofiqi.anurr.iak_9des">
+    package="com.nurrofiqi.anurr.myTheatre">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,14 +16,14 @@
         android:theme="@style/MyTheme"
         tools:replace="android:icon">
         <activity
-            android:name=".view.ActivityMain"
+            android:name="com.nurrofiqi.anurr.myTheatre.view.ActivityMain"
             android:theme="@style/MyTheme"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".view.ActivityDetail"
+            android:name="com.nurrofiqi.anurr.myTheatre.view.ActivityDetail"
             android:theme="@style/MyDetail" />
         <activity
-            android:name=".view.ActivitySplash"
+            android:name="com.nurrofiqi.anurr.myTheatre.view.ActivitySplash"
             android:noHistory="true"
             android:theme="@style/MyDetail" >
             <intent-filter>
@@ -31,7 +31,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.ActivityFirstRun" />
+        <activity android:name="com.nurrofiqi.anurr.myTheatre.view.ActivityFirstRun" />
     </application>
 
 </manifest>

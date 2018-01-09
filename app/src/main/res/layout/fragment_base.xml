@@ -44,7 +44,7 @@
                         android:paddingTop="8dp"
                         android:text="Recommended for You"
                         android:textColor="@color/blackColor"
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <View

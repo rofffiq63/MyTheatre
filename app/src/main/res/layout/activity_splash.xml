@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:padding="@dimen/paddingStart"
-    tools:context="com.nurrofiqi.anurr.iak_9des.view.ActivitySplash">
+    tools:context="com.nurrofiqi.anurr.myTheatre.view.ActivitySplash">
 
     <ImageView
         android:id="@+id/iconsplash"
