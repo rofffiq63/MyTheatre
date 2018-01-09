@@ -31,14 +31,13 @@ import java.util.List;
 
 public class AdapterTrailers extends RecyclerView.Adapter<AdapterTrailers.ViewHolder> {
 
-    Context context;
-    List<PojoDetail.VideosBean.ResultsBean> videosdata;
+    private Context context;
+    private List<PojoDetail.VideosBean.ResultsBean> videosdata;
 
     public AdapterTrailers(Context applicationContext, ArrayList<PojoDetail.VideosBean.ResultsBean> videosdata) {
         this.context = applicationContext;
         this.videosdata = videosdata;
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

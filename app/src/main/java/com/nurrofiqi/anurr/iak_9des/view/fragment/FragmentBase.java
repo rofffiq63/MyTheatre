@@ -28,6 +28,8 @@ import com.nurrofiqi.anurr.iak_9des.R;
 import com.nurrofiqi.anurr.iak_9des.model.PojoGenre;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtMovies;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtSeries;
+import com.nurrofiqi.anurr.iak_9des.model.PojoPopCast;
+import com.nurrofiqi.anurr.iak_9des.view.adapter.AdapterCast;
 import com.nurrofiqi.anurr.iak_9des.view.adapter.AdapterGenres;
 import com.nurrofiqi.anurr.iak_9des.view.adapter.AdapterAtMovies;
 import com.nurrofiqi.anurr.iak_9des.view.adapter.AdapterAtSeries;
@@ -44,22 +46,24 @@ import butterknife.ButterKnife;
 
 public class FragmentBase extends android.support.v4.app.Fragment {
 
-    static RecyclerView genreList, recommendedList, upcomingList, nowList, popularList;
+    static RecyclerView genreList, recommendedList, upcomingList, nowList, popularList, popcastList;
 
     static ArrayList<PojoAtMovies.ResultsBean> recommendedArray, upArray, nowArray, popArray;
     static ArrayList<PojoAtSeries.ResultsBean> recommendedSeries, onSeries, todaySeries, popSeries;
     static ArrayList<PojoGenre.GenresBean> genreData;
+    static ArrayList<PojoPopCast.ResultsBean> popcastData;
 
     static AdapterAtMovies adapterUpMovies, adapterNowMovies, adapterPopMovies, adapterRecommMovies;
     static AdapterAtSeries adapterOnAirSeries, adapterTodaySeries, adapterPopSeries, adapterRecommSeries;
     static AdapterGenres adapterGenres;
+    static AdapterCast adapterCast;
 
-    static LinearLayout nowHolder, popHolder, upHolder;
+    static LinearLayout nowHolder, popHolder, upHolder, popcastHolder;
     static RelativeLayout recommendedHolder;
     static RelativeLayout progresscircle;
 
     TextView nowShowing, popular, upcoming, upsubtitle, popsubtitle, nowsubtitle;
-    BottomNavigationViewEx bottomNavigationViewEx;
+    static BottomNavigationViewEx bottomNavigationViewEx;
 
     String save = "save";
     int NORMAL_LAYOUT = 0;
@@ -77,12 +81,14 @@ public class FragmentBase extends android.support.v4.app.Fragment {
         nowHolder = view.findViewById(R.id.nowlayout);
         popHolder = view.findViewById(R.id.popularlayout);
         recommendedHolder = view.findViewById(R.id.recommendedlayout);
+        popcastHolder = view.findViewById(R.id.popcastlayout);
 
         genreList = view.findViewById(R.id.genre_list);
         upcomingList = view.findViewById(R.id.uplist);
         recommendedList = view.findViewById(R.id.recommendedlist);
         nowList = view.findViewById(R.id.nowlist);
         popularList = view.findViewById(R.id.poplist);
+        popcastList = view.findViewById(R.id.popcastlist);
         nowShowing = view.findViewById(R.id.nowtitle);
         popular = view.findViewById(R.id.poptitle);
         upcoming = view.findViewById(R.id.uptitle);
@@ -105,6 +111,7 @@ public class FragmentBase extends android.support.v4.app.Fragment {
         upHolder.setVisibility(View.GONE);
         nowHolder.setVisibility(View.GONE);
         popHolder.setVisibility(View.GONE);
+        popcastHolder.setVisibility(View.GONE);
 
         initiateListView();
     }
@@ -135,6 +142,13 @@ public class FragmentBase extends android.support.v4.app.Fragment {
     }
 
     public static FragmentBase newInstance() {
+        return new FragmentBase();
+    }
+
+    public static FragmentBase getPopCast(List<PojoPopCast.ResultsBean> popCastData){
+        popcastData.addAll(popCastData);
+        popcastList.getAdapter().notifyDataSetChanged();
+        popcastList.scheduleLayoutAnimation();
         return new FragmentBase();
     }
 
@@ -240,6 +254,10 @@ public class FragmentBase extends android.support.v4.app.Fragment {
                 popularList.setAdapter(adapterPopMovies);
                 upcomingList.setAdapter(adapterUpMovies);
 
+                popcastData = new ArrayList<>();
+                adapterCast = new AdapterCast(getContext(), null, popcastData, 1);
+                popcastList.setAdapter(adapterCast);
+
                 break;
             case 1:
                 nowShowing.setText("Airing today");
@@ -275,10 +293,12 @@ public class FragmentBase extends android.support.v4.app.Fragment {
         SnapHelper snapHelper1 = new GravitySnapHelper(Gravity.START);
         SnapHelper snapHelper2 = new GravitySnapHelper(Gravity.START);
         SnapHelper snapHelper3 = new GravitySnapHelper(Gravity.START);
+        SnapHelper snapHelper4 = new GravitySnapHelper(Gravity.START);
         snapHelper.attachToRecyclerView(recommendedList);
         snapHelper1.attachToRecyclerView(nowList);
         snapHelper2.attachToRecyclerView(popularList);
         snapHelper3.attachToRecyclerView(upcomingList);
+        snapHelper4.attachToRecyclerView(popcastList);
         setGenre();
     }
 
@@ -295,5 +315,8 @@ public class FragmentBase extends android.support.v4.app.Fragment {
         popHolder.setVisibility(View.VISIBLE);
         nowHolder.setVisibility(View.VISIBLE);
         progresscircle.setVisibility(View.GONE);
+        if (bottomNavigationViewEx.getCurrentItem()== 0){
+            popcastHolder.setVisibility(View.VISIBLE);
+        }
     }
 }

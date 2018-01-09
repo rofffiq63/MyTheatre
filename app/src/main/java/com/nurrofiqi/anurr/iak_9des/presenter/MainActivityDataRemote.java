@@ -16,6 +16,7 @@ import com.nurrofiqi.anurr.iak_9des.model.PojoGenre;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtMovies;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtSeries;
 import com.nurrofiqi.anurr.iak_9des.model.PojoMultiSearch;
+import com.nurrofiqi.anurr.iak_9des.model.PojoPopCast;
 import com.nurrofiqi.anurr.iak_9des.model.PojoReviews;
 
 import static com.android.volley.Request.Method;
@@ -103,7 +104,14 @@ public class MainActivityDataRemote implements MainActivityDataResource {
                     if (pojoCast == null) {
                         mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
                     } else {
-                        mainActivityGetCallBack.successCast(pojoCast.getCast());
+                        mainActivityGetCallBack.successCast(pojoCast.getCast(), null, id);
+                    }
+                }else if(id == 990){
+                    final PojoPopCast pojoPopCast = new Gson().fromJson(response, PojoPopCast.class);
+                    if (pojoPopCast == null) {
+                        mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
+                    } else {
+                        mainActivityGetCallBack.successCast(null, pojoPopCast.getResults(), id);
                     }
                 } else {
                     Toast.makeText(context, "ID not registered. Nothing requested", Toast.LENGTH_SHORT).show();

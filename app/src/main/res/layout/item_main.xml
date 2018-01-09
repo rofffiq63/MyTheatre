@@ -8,8 +8,7 @@
     android:focusable="true"
     android:foreground="?selectableItemBackgroundBorderless"
     android:orientation="vertical"
-    android:paddingEnd="2dp"
-    android:paddingStart="2dp">
+    >
 
     <ImageView
         android:id="@+id/poster"
@@ -22,8 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingEnd="6dp"
-        android:paddingStart="6dp"
         android:paddingTop="4dp">
 
         <TextView
@@ -41,7 +38,7 @@
         <View
             android:layout_width="24dp"
             android:layout_height="1dp"
-            android:background="@color/redColor" />
+            android:background="@color/appColor" />
 
         <TextView
             android:id="@+id/date"

@@ -21,8 +21,8 @@ import java.util.List;
 
 public class AdapterBackdrops extends RecyclerView.Adapter<AdapterBackdrops.ViewHolder> {
 
-    Context context;
-    List<PojoDetail.ImagesBean.BackdropsBean> backdropsdata;
+    private Context context;
+    private List<PojoDetail.ImagesBean.BackdropsBean> backdropsdata;
 
     public AdapterBackdrops(Context context, ArrayList<PojoDetail.ImagesBean.BackdropsBean> backdropsdata) {
         this.context = context;

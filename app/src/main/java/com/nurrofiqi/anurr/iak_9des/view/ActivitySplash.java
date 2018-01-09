@@ -28,9 +28,16 @@ public class ActivitySplash extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                checkFirstRun();
+                //checkFirstRun();
             }
         }, 500);
+
+        iconSplash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkFirstRun();
+            }
+        });
 
     }
 
@@ -74,7 +81,6 @@ public class ActivitySplash extends AppCompatActivity {
             // TODO This is a new install (or the user cleared the shared preferences)
             Intent intent = new Intent(this, ActivityFirstRun.class);
             startActivity(intent);
-            finish();
 
         } else if (currentVersionCode > savedVersionCode) {
 

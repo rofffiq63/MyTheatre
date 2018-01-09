@@ -25,8 +25,8 @@ import java.util.List;
 
 public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder> {
 
-    Context context;
-    List<PojoMultiSearch.ResultsBean> search;
+    private Context context;
+    private List<PojoMultiSearch.ResultsBean> search;
 
     public AdapterSearch(Context context, ArrayList<PojoMultiSearch.ResultsBean> search) {
         this.context = context;
@@ -44,12 +44,11 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
     public void onBindViewHolder(final AdapterSearch.ViewHolder holder, int position) {
         final PojoMultiSearch.ResultsBean listitem = search.get(position);
         String kind = listitem.getMedia_type();
-        double voteAvg;
-        String oriDate = null, poster;
+        String oriDate, poster;
 
         switch (kind.toLowerCase()) {
             case "movie":
-                voteAvg = listitem.getVote_average();
+                kind = "film";
                 oriDate = listitem.getRelease_date();
                 poster = "http://image.tmdb.org/t/p/w185" + listitem.getPoster_path();
 
@@ -67,7 +66,6 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
 
             case "tv":
                 kind = "tv series";
-                voteAvg = listitem.getVote_average();
                 oriDate = listitem.getFirst_air_date();
                 poster = "http://image.tmdb.org/t/p/w185" + listitem.getPoster_path();
 
@@ -96,7 +94,6 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.ViewHolder
                         .into(holder.smallposter);
         }
 
-        final String finalOriDate = oriDate;
         final String mediatype = listitem.getMedia_type().toUpperCase();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

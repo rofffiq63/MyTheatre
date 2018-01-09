@@ -32,6 +32,7 @@ import com.nurrofiqi.anurr.iak_9des.model.PojoCast;
 import com.nurrofiqi.anurr.iak_9des.model.PojoDetail;
 import com.nurrofiqi.anurr.iak_9des.model.PojoGenre;
 import com.nurrofiqi.anurr.iak_9des.model.PojoMultiSearch;
+import com.nurrofiqi.anurr.iak_9des.model.PojoPopCast;
 import com.nurrofiqi.anurr.iak_9des.model.PojoReviews;
 import com.nurrofiqi.anurr.iak_9des.presenter.MainActivityContract;
 import com.nurrofiqi.anurr.iak_9des.presenter.MainActivityPresenter;
@@ -105,6 +106,8 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
     RecyclerView castList;
     @BindView(R.id.reviewholder)
     LinearLayout reviewHolder;
+    @BindView(R.id.similiarholder)
+    LinearLayout simliarholder;
 
     ArrayList<PojoAtMovies.ResultsBean> similiarData;
     ArrayList<PojoReviews.ResultsBean> reviewsData;
@@ -190,7 +193,7 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
         backdropList.setAdapter(adapterBackdrops);
 
         castData = new ArrayList<>();
-        adapterCast = new AdapterCast(this, castData);
+        adapterCast = new AdapterCast(this, castData, null, 0);
         castList.setAdapter(adapterCast);
 
         mPresenter.setLink(casturl, 999);
@@ -213,6 +216,9 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
 
     @Override
     public void successMainMovies(List<PojoAtMovies.ResultsBean> mainmoviesdata, int id) {
+        if (mainmoviesdata.size()==0){
+            simliarholder.setVisibility(View.GONE);
+        }
         this.similiarData.addAll(mainmoviesdata);
         adapterSimiliar.notifyDataSetChanged();
     }
@@ -233,7 +239,6 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
         trailerlist.getAdapter().notifyDataSetChanged();
         genreslist.getAdapter().notifyDataSetChanged();
         backdropList.getAdapter().notifyDataSetChanged();
-        backdropList.scrollToPosition(backdropsdata.size()-1);
         progressHolder.setVisibility(View.GONE);
         Toast.makeText(this, "Total trailers: " + videosdata.size(), Toast.LENGTH_SHORT).show();
         Toast.makeText(this, "Total backdrops: " + backdropsdata.size(), Toast.LENGTH_SHORT).show();
@@ -245,7 +250,7 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
             arraycompanies[i] = item;
         }
 
-        if (backdropsdata.size() == 0){
+        if (backdropsdata.size() == 0) {
             collapsingToolbarLayout.setBackgroundColor(getResources().getColor(R.color.appColor));
         }
 
@@ -296,24 +301,12 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
 
         Glide.with(this)
                 .load("http://image.tmdb.org/t/p/w342" + poster)
-                .listener(new RequestListener<String, GlideDrawable>() {
-                    @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        backdropList.smoothScrollToPosition(0);
-                        return false;
-                    }
-                })
                 .into(mposter);
 
     }
 
     @Override
-    public void successCast(List<PojoCast.CastBean> castdata) {
+    public void successCast(List<PojoCast.CastBean> castdata, List<PojoPopCast.ResultsBean> popcastdata, int id) {
         this.castData.addAll(castdata);
         castList.getAdapter().notifyDataSetChanged();
     }

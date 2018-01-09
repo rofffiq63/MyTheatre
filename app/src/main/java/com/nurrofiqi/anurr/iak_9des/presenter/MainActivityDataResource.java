@@ -8,6 +8,7 @@ import com.nurrofiqi.anurr.iak_9des.model.PojoGenre;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtMovies;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtSeries;
 import com.nurrofiqi.anurr.iak_9des.model.PojoMultiSearch;
+import com.nurrofiqi.anurr.iak_9des.model.PojoPopCast;
 import com.nurrofiqi.anurr.iak_9des.model.PojoReviews;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public interface MainActivityDataResource {
 
         void successGenres(List<PojoGenre.GenresBean> genredata);
 
-        void successCast(List<PojoCast.CastBean> castdata);
+        void successCast(List<PojoCast.CastBean> castdata, List<PojoPopCast.ResultsBean> popcastdata, int id);
 
         void successSearch(List<PojoMultiSearch.ResultsBean> searchdata);
 

@@ -45,6 +45,7 @@ import com.nurrofiqi.anurr.iak_9des.model.PojoGenre;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtMovies;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtSeries;
 import com.nurrofiqi.anurr.iak_9des.model.PojoMultiSearch;
+import com.nurrofiqi.anurr.iak_9des.model.PojoPopCast;
 import com.nurrofiqi.anurr.iak_9des.model.PojoReviews;
 import com.nurrofiqi.anurr.iak_9des.presenter.MainActivityContract;
 import com.nurrofiqi.anurr.iak_9des.presenter.MainActivityPresenter;
@@ -126,6 +127,7 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
     private static final int GENRE_MOVIES = 4;
     private static final int GENRE_SERIES = 14;
     private static final int SEARCH = 5;
+    private static final int POP_CAST = 990;
 
     private int revealX;
     private int revealY;
@@ -320,6 +322,7 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
                         reqLink(UP_MOVIES);
                         reqLink(NOW_MOVIES);
                         reqLink(POP_MOVIES);
+                        reqLink(POP_CAST);
                         break;
                     case R.id.navigation_series:
                         openFragment(fragmentBase, FRAGMENT_BASE);
@@ -491,6 +494,10 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
                 url = "https://api.themoviedb.org/3/genre/tv/list?api_key=" +
                         API_KEY + "&language=en-US";
                 break;
+            case POP_CAST:
+                url = "https://api.themoviedb.org/3/person/popular?api_key=" +
+                        API_KEY + "&language=en-US&page=" + String.valueOf(pagecount);
+                break;
             default:
                 break;
         }
@@ -513,8 +520,8 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
     }
 
     @Override
-    public void successCast(List<PojoCast.CastBean> castdata) {
-
+    public void successCast(List<PojoCast.CastBean> castdata, List<PojoPopCast.ResultsBean> popcastdata, int id) {
+        FragmentBase.getPopCast(popcastdata);
     }
 
     @Override

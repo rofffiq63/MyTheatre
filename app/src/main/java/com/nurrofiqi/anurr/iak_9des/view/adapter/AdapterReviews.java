@@ -22,8 +22,8 @@ import java.util.List;
 
 public class AdapterReviews extends RecyclerView.Adapter<AdapterReviews.ViewHolder> {
 
-    Context context;
-    List<PojoReviews.ResultsBean> data;
+    private Context context;
+    private List<PojoReviews.ResultsBean> data;
 
     public AdapterReviews(Context applicationContext, ArrayList<PojoReviews.ResultsBean> reviewsdata) {
         this.context = applicationContext;

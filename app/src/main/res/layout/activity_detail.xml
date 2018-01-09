@@ -20,13 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/appColor"
-            app:scrimVisibleHeightTrigger="100dp"
-            app:scrimAnimationDuration="200"
             app:collapsedTitleTextAppearance="@style/collapsedappbar"
+            app:contentScrim="@color/appColor"
             app:expandedTitleTextAppearance="@style/expandedappbar"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
-            >
+            app:scrimAnimationDuration="200"
+            app:scrimVisibleHeightTrigger="100dp">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/backdropdetail"
@@ -45,16 +44,15 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:minHeight="240dp"
                 android:fitsSystemWindows="true"
-                android:orientation="vertical"
-                >
+                android:minHeight="240dp"
+                android:orientation="vertical">
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
-                    android:background="@color/white"
-                    android:layout_alignParentBottom="true"/>
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/white" />
 
                 <ImageView
                     android:id="@+id/poster"
@@ -69,14 +67,14 @@
                     android:id="@+id/mediatype"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@id/poster"
                     android:paddingBottom="4dp"
                     android:paddingEnd="8dp"
                     android:paddingStart="8dp"
                     android:paddingTop="4dp"
                     android:text="Media Type"
                     android:textColor="@color/blackColor"
-                    android:layout_toRightOf="@id/poster"
-                    android:layout_alignParentBottom="true"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -146,7 +144,7 @@
                     <CheckBox
                         android:id="@+id/favmark"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:button="@drawable/love_check"
                         android:padding="8dp"
                         android:stateListAnimator="@animator/animator" />
@@ -154,7 +152,7 @@
                     <CheckBox
                         android:id="@+id/listmark"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:button="@drawable/bookmark_check"
                         android:padding="8dp"
                         android:stateListAnimator="@animator/animator" />
@@ -173,6 +171,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/genres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="16dp"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_genre" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -317,42 +330,18 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/trailers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="1dp"
                     android:layout_marginTop="1dp"
-                    android:background="@color/white"
-                    android:orientation="vertical"
-                    android:paddingBottom="16dp"
-                    android:paddingTop="16dp">
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/trailers"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clipToPadding="false"
-                        android:nestedScrollingEnabled="false"
-                        android:orientation="horizontal"
-                        android:overScrollMode="never"
-                        android:paddingTop="@dimen/paddingStart"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_trailers" />
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/genres"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clipToPadding="false"
-                        android:nestedScrollingEnabled="false"
-                        android:orientation="horizontal"
-                        android:overScrollMode="never"
-                        android:padding="16dp"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_genre" />
-
-
-                </LinearLayout>
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_trailers" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -421,8 +410,7 @@
                         android:id="@+id/reviewlist"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"
-                        />
+                        android:nestedScrollingEnabled="false" />
 
                     <View
                         android:layout_width="match_parent"
@@ -445,18 +433,18 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/similiarholder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/content_background"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingTop="16dp"
                         android:paddingStart="16dp"
+                        android:paddingTop="16dp"
                         android:text="Similiar movies"
                         android:textColor="@color/blackColor"
                         android:textSize="14sp"

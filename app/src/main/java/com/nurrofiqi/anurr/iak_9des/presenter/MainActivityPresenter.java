@@ -5,6 +5,7 @@ import com.nurrofiqi.anurr.iak_9des.model.PojoDetail;
 import com.nurrofiqi.anurr.iak_9des.model.PojoGenre;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtSeries;
 import com.nurrofiqi.anurr.iak_9des.model.PojoMultiSearch;
+import com.nurrofiqi.anurr.iak_9des.model.PojoPopCast;
 import com.nurrofiqi.anurr.iak_9des.model.PojoReviews;
 
 import java.util.ArrayList;
@@ -58,8 +59,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
             }
 
             @Override
-            public void successCast(List<PojoCast.CastBean> castdata) {
-                view.successCast(castdata);
+            public void successCast(List<PojoCast.CastBean> castdata, List<PojoPopCast.ResultsBean> popcastdata, int id) {
+                view.successCast(castdata, popcastdata, id);
             }
 
             @Override

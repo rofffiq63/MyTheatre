@@ -20,10 +20,10 @@ import java.util.List;
 
 public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.ViewHolder> {
 
-    Context context;
-    List<PojoGenre.GenresBean> genresBeans;
-    List<PojoDetail.GenresBean> genresdetail;
-    int id;
+    private Context context;
+    private List<PojoGenre.GenresBean> genresBeans;
+    private List<PojoDetail.GenresBean> genresdetail;
+    private int id;
 
     public AdapterGenres(Context context, ArrayList<PojoGenre.GenresBean> genre, ArrayList<PojoDetail.GenresBean> genredetail, int id) {
         this.context = context;
@@ -42,13 +42,11 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (id == 0) {
             final PojoGenre.GenresBean listitem = genresBeans.get(position);
-            String name = listitem.getName();
-            name = name.toUpperCase();
+            String name = listitem.getName().toUpperCase();
             holder.mgenres.setText(name);
         } else {
             final PojoDetail.GenresBean listitem = genresdetail.get(position);
-            String name = listitem.getName();
-            name = name.toUpperCase();
+            String name = listitem.getName().toUpperCase();
             holder.mgenres.setText(name);
         }
 

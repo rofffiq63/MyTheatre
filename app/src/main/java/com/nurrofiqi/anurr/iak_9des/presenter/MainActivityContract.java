@@ -7,6 +7,7 @@ import com.nurrofiqi.anurr.iak_9des.model.PojoGenre;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtMovies;
 import com.nurrofiqi.anurr.iak_9des.model.PojoAtSeries;
 import com.nurrofiqi.anurr.iak_9des.model.PojoMultiSearch;
+import com.nurrofiqi.anurr.iak_9des.model.PojoPopCast;
 import com.nurrofiqi.anurr.iak_9des.model.PojoReviews;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class MainActivityContract {
                            String status, String tagline, double rate, int vote, String language, List<PojoDetail.ImagesBean.BackdropsBean> backdropsdata, List<PojoDetail.ImagesBean.PostersBean> posterdata,
                            List<PojoDetail.VideosBean.ResultsBean> videosdata);
 
-        void successCast(List<PojoCast.CastBean> castdata);
+        void successCast(List<PojoCast.CastBean> castdata, List<PojoPopCast.ResultsBean> popcastdata, int id);
 
         void successGenre(List<PojoGenre.GenresBean> genredata);
 

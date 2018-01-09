@@ -36,10 +36,10 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class AdapterAtMovies extends RecyclerView.Adapter<AdapterAtMovies.ViewHolder> {
 
-    Context context;
-    List<PojoAtMovies.ResultsBean> data;
-    int type;
-    String media = "MOVIE";
+    private Context context;
+    private List<PojoAtMovies.ResultsBean> data;
+    private int type;
+    private String media = "MOVIE";
 
     public static final int ITEM_TYPE_NORMAL = 0;
     public static final int ITEM_TYPE_RECOMMENDED = 1;
@@ -98,7 +98,7 @@ public class AdapterAtMovies extends RecyclerView.Adapter<AdapterAtMovies.ViewHo
                 String poster = "http://image.tmdb.org/t/p/w342" + listitem.getPoster_path();
 
                 ((NormalMoviesView) holder).judul.setText(listitem.getTitle());
-                ((NormalMoviesView) holder).mdate.setText(oriDate + " film");
+                ((NormalMoviesView) holder).mdate.setText(oriDate + " movie");
 
                 Glide.with(context)
                         .load(poster)

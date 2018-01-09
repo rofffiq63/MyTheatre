@@ -35,10 +35,10 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class AdapterAtSeries extends RecyclerView.Adapter<AdapterAtSeries.ViewHolder> {
 
-    Context context;
-    List<PojoAtSeries.ResultsBean> data;
-    int type;
-    String media = "TV SERIES";
+    private Context context;
+    private List<PojoAtSeries.ResultsBean> data;
+    private int type;
+    private String media;
 
     public static final int ITEM_TYPE_NORMAL = 0;
     public static final int ITEM_TYPE_RECOMMENDED = 1;
@@ -47,6 +47,7 @@ public class AdapterAtSeries extends RecyclerView.Adapter<AdapterAtSeries.ViewHo
         this.context = applicationContext;
         this.data = seriesData;
         this.type = viewType;
+        media = "TV SERIES";
     }
 
     @Override
