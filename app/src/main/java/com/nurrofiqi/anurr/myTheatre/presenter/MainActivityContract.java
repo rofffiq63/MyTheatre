@@ -6,6 +6,7 @@ import com.nurrofiqi.anurr.myTheatre.model.PojoDetail;
 import com.nurrofiqi.anurr.myTheatre.model.PojoGenre;
 import com.nurrofiqi.anurr.myTheatre.model.PojoAtMovies;
 import com.nurrofiqi.anurr.myTheatre.model.PojoAtSeries;
+import com.nurrofiqi.anurr.myTheatre.model.PojoGenreList;
 import com.nurrofiqi.anurr.myTheatre.model.PojoMultiSearch;
 import com.nurrofiqi.anurr.myTheatre.model.PojoPopCast;
 import com.nurrofiqi.anurr.myTheatre.model.PojoReviews;
@@ -37,6 +38,8 @@ public class MainActivityContract {
         void successOnSearch(List<PojoMultiSearch.ResultsBean> searchdata);
 
         void successReview(List<PojoReviews.ResultsBean> reviewdata);
+
+        void successGenreList(List<PojoGenreList.ResultsBean> genrelistdata);
 
         void onError(String msg);
 

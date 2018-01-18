@@ -16,22 +16,25 @@
         android:theme="@style/MyTheme"
         tools:replace="android:icon">
         <activity
-            android:name="com.nurrofiqi.anurr.myTheatre.view.ActivityMain"
+            android:name=".view.ActivityMain"
             android:theme="@style/MyTheme"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.nurrofiqi.anurr.myTheatre.view.ActivityDetail"
+            android:name=".view.ActivityDetail"
             android:theme="@style/MyDetail" />
         <activity
-            android:name="com.nurrofiqi.anurr.myTheatre.view.ActivitySplash"
+            android:name=".view.ActivitySplash"
             android:noHistory="true"
-            android:theme="@style/MyDetail" >
+            android:theme="@style/MyDetail">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.nurrofiqi.anurr.myTheatre.view.ActivityFirstRun" />
+        <activity android:name=".view.ActivityFirstRun" />
+        <activity android:name=".view.ActivityGenreList"
+            android:theme="@style/MyDetail"/>
     </application>
 
 </manifest>

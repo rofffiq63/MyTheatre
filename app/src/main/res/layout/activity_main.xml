@@ -181,8 +181,11 @@
                 android:layout_marginStart="8dp"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
                 android:overScrollMode="never"
-                android:visibility="visible" />
+                android:visibility="visible"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_search" />
 
             <TextView
                 android:id="@+id/nothing"

@@ -1,6 +1,7 @@
 package com.nurrofiqi.anurr.myTheatre.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.nurrofiqi.anurr.myTheatre.R;
 import com.nurrofiqi.anurr.myTheatre.model.PojoDetail;
 import com.nurrofiqi.anurr.myTheatre.model.PojoGenre;
+import com.nurrofiqi.anurr.myTheatre.view.ActivityGenreList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,8 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.ViewHolder
     private Context context;
     private List<PojoGenre.GenresBean> genresBeans;
     private List<PojoDetail.GenresBean> genresdetail;
-    private int id;
+    private int id, genreid;
+    private String genre;
 
     public AdapterGenres(Context context, ArrayList<PojoGenre.GenresBean> genre, ArrayList<PojoDetail.GenresBean> genredetail, int id) {
         this.context = context;
@@ -42,14 +45,24 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (id == 0) {
             final PojoGenre.GenresBean listitem = genresBeans.get(position);
-            String name = listitem.getName().toUpperCase();
-            holder.mgenres.setText(name);
+            genre = listitem.getName().toUpperCase();
+            genreid = listitem.getId();
+            holder.mgenres.setText(genre);
         } else {
             final PojoDetail.GenresBean listitem = genresdetail.get(position);
-            String name = listitem.getName().toUpperCase();
-            holder.mgenres.setText(name);
+            genre = listitem.getName().toUpperCase();
+            genreid = listitem.getId();
+            holder.mgenres.setText(genre);
         }
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(context, ActivityGenreList.class);
+                in.putExtra("genrename", genre);
+                in.putExtra("genreid", genreid);
+                v.getContext().startActivity(in);
+            }
+        });
     }
 
     @Override

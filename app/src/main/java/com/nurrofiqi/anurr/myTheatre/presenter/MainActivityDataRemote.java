@@ -15,6 +15,7 @@ import com.nurrofiqi.anurr.myTheatre.model.PojoDetail;
 import com.nurrofiqi.anurr.myTheatre.model.PojoGenre;
 import com.nurrofiqi.anurr.myTheatre.model.PojoAtMovies;
 import com.nurrofiqi.anurr.myTheatre.model.PojoAtSeries;
+import com.nurrofiqi.anurr.myTheatre.model.PojoGenreList;
 import com.nurrofiqi.anurr.myTheatre.model.PojoMultiSearch;
 import com.nurrofiqi.anurr.myTheatre.model.PojoPopCast;
 import com.nurrofiqi.anurr.myTheatre.model.PojoReviews;
@@ -106,12 +107,19 @@ public class MainActivityDataRemote implements MainActivityDataResource {
                     } else {
                         mainActivityGetCallBack.successCast(pojoCast.getCast(), null, id);
                     }
-                }else if(id == 990){
+                } else if (id == 990) {
                     final PojoPopCast pojoPopCast = new Gson().fromJson(response, PojoPopCast.class);
                     if (pojoPopCast == null) {
                         mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
                     } else {
                         mainActivityGetCallBack.successCast(null, pojoPopCast.getResults(), id);
+                    }
+                } else if (id == 123) {
+                    final PojoGenreList pojoGenreList = new Gson().fromJson(response, PojoGenreList.class);
+                    if (pojoGenreList == null) {
+                        mainActivityGetCallBack.onError("BIG ERROR ON REQUEST");
+                    } else {
+                        mainActivityGetCallBack.successGenreList(pojoGenreList.getResults());
                     }
                 } else {
                     Toast.makeText(context, "ID not registered. Nothing requested", Toast.LENGTH_SHORT).show();

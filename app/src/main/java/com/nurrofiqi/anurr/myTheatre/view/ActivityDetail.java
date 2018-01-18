@@ -28,6 +28,7 @@ import com.nurrofiqi.anurr.myTheatre.model.PojoAtSeries;
 import com.nurrofiqi.anurr.myTheatre.model.PojoCast;
 import com.nurrofiqi.anurr.myTheatre.model.PojoDetail;
 import com.nurrofiqi.anurr.myTheatre.model.PojoGenre;
+import com.nurrofiqi.anurr.myTheatre.model.PojoGenreList;
 import com.nurrofiqi.anurr.myTheatre.model.PojoMultiSearch;
 import com.nurrofiqi.anurr.myTheatre.model.PojoPopCast;
 import com.nurrofiqi.anurr.myTheatre.model.PojoReviews;
@@ -327,6 +328,11 @@ public class ActivityDetail extends AppCompatActivity implements MainActivityCon
         } else {
             noreview.setText("See all " + reviewdata.size() + " Reviews");
         }
+    }
+
+    @Override
+    public void successGenreList(List<PojoGenreList.ResultsBean> genrelistdata) {
+
     }
 
     @Override

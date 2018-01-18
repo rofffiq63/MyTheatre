@@ -39,6 +39,7 @@ import com.nurrofiqi.anurr.myTheatre.model.PojoDetail;
 import com.nurrofiqi.anurr.myTheatre.model.PojoGenre;
 import com.nurrofiqi.anurr.myTheatre.model.PojoAtMovies;
 import com.nurrofiqi.anurr.myTheatre.model.PojoAtSeries;
+import com.nurrofiqi.anurr.myTheatre.model.PojoGenreList;
 import com.nurrofiqi.anurr.myTheatre.model.PojoMultiSearch;
 import com.nurrofiqi.anurr.myTheatre.model.PojoPopCast;
 import com.nurrofiqi.anurr.myTheatre.model.PojoReviews;
@@ -60,7 +61,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ActivityMain extends AppCompatActivity implements MainActivityContract.View {
-
 
     @BindView(R.id.rootlayout)
     CoordinatorLayout rootLayout;
@@ -207,7 +207,7 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
                     }
                 });
 
-        mainActivityPresenter = new MainActivityPresenter(MainActivityRepoInject.provideToMainRepo(getApplicationContext()));
+        mainActivityPresenter = new MainActivityPresenter(MainActivityRepoInject.provideToMainRepo(this));
         mainActivityPresenter.onAttachView(this);
 
         darkDrop.setOnClickListener(new View.OnClickListener() {
@@ -550,6 +550,11 @@ public class ActivityMain extends AppCompatActivity implements MainActivityContr
 
     @Override
     public void successReview(List<PojoReviews.ResultsBean> reviewdata) {
+
+    }
+
+    @Override
+    public void successGenreList(List<PojoGenreList.ResultsBean> genrelistdata) {
 
     }
 
